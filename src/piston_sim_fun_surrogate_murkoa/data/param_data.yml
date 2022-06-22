@@ -1,0 +1,10 @@
+#dictionary of limits for surrogate model
+---
+surrogate-model-limits:
+    M: [30, 60]
+    S: [0.005, 0.02]
+    V_0: [0.002, 0.01]
+    k: [1000, 5000]
+    P_0: [90000, 110000]
+    T_a: [290,296]
+    T_0: [340, 360]
