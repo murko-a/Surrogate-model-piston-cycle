@@ -6,7 +6,7 @@ from time import process_time
 import matplotlib.pyplot as plt
 from IPython.display import display
 
-def performance_fun(self, *mdls_pf, predict_data, plot_perf):
+def performance_fun(self, *mdls_pf, perf_df, predict_data, plot_perf):
     predict_data = predict_data or self.test_X
     self.mdls_pf = mdls_pf
     performance_df = pd.DataFrame(columns = ['Accuracy', 'mean(MAE)', 'std(MAE)','mean(MSE)', 'std(MSE)',
@@ -79,7 +79,8 @@ def performance_fun(self, *mdls_pf, predict_data, plot_perf):
             performance_df.loc[mm, performance_df.columns[9]] = tt
     time_mod(self)
 
-    display(performance_df)
+    if perf_df == True:
+        display(performance_df)
 
     ordered_data_acc = performance_df.sort_values(by='Accuracy', ascending=True)
     ordered_data_mae = performance_df.sort_values(by='mean(MAE)', ascending=True)
@@ -160,10 +161,10 @@ def performance_fun(self, *mdls_pf, predict_data, plot_perf):
 
         plt.show()
 
-    if plot_perf == 'lolipop':
+    if plot_perf == 'lolipop-plot':
         plot_performance_lolipop(self, ordered_data_acc, ordered_data_mae, ordered_data_mse,
         ordered_data_rmse, ordered_data_r2, ordered_data_time)
-    elif plot_perf == 'boxplot':
+    elif plot_perf == 'box-plot':
         plot_performance_boxplot(self, results_mae, results_mse, results_rmse, results_r2)
 
     
