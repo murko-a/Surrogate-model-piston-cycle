@@ -10,6 +10,7 @@ Simon Fraser University, accessed 18 June 2022, <https://www.sfu.ca/~ssurjano/pi
 
 import os
 import sys
+from sklearn.utils import shuffle
 import yaml
 import csv
 import pandas as pd
@@ -75,7 +76,7 @@ class SurrogateModel():
 		prediction results can be obtained.
 	
     """
-	def __init__(self, file_name = None, n_splt=5, rand_state = None):#, shuffle = False):
+	def __init__(self, file_name = None, n_splt=5, rand_state = None, shuff=False):
 		self.file_name = file_name or os.path.join(os.getcwd(), "data/param_data.yml")
 		split_tup = os.path.splitext(self.file_name)
 		
@@ -111,7 +112,7 @@ class SurrogateModel():
 		self.X = self.dataset.iloc[:, 0:7].values
 		self.y = self.dataset.iloc[:, 9].values
 
-		self.kfold = KFold(n_splits=n_splt, shuffle=True, random_state=rand_state)#, shuffle=shuffle)
+		self.kfold = KFold(n_splits=n_splt, shuffle=True, random_state=rand_state, shuffle=shuff)
 
 		for train_ix, test_ix in self.kfold.split(self.X):
 			self.train_X, self.test_X = self.X[train_ix], self.X[test_ix]
