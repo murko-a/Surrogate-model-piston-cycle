@@ -1,5 +1,5 @@
 """
-Author: Anze Murko <anze.murko@outlook.com>
+Author: Anze Murko <anze.murko@rwth-aachen.com>
 
 This package is distributed under MIT license.
 Piston simulation function problem from:

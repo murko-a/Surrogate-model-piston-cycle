@@ -1,6 +1,6 @@
 
 # Surrogate modeling of piston simulation function
-[![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub latest commit](https://badgen.net/github/last-commit/Naereen/Strapdown.js)](https://GitHub.com/Naereen/StrapDown.js/commit/)  [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub latest commit](https://badgen.net/github/last-commit/Naereen/Strapdown.js)](https://github.com/murko-a/Surrogate-model-piston-cycle/blob/master/src/piston_sim_fun_surrogate_murkoa/piston_fun_sm.py/commit/)  [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
 
 ## Table of contents
@@ -35,6 +35,7 @@ Symbols:
 * K-Nearest Neighbors Regression.
 
 Methods are in package functions used as:
+<div align="center">
 
 | Method                      | Package deffinition|
 |:---------------------------:|:------------------:|
@@ -43,7 +44,9 @@ Methods are in package functions used as:
 | Support Vector Regression   | "SVR"              |
 |K-Nearest Neighbors Regression   | "KNR"              |
 
-<p align="justify"> To develop surrogate models of piston cycle function with specified methods, we have used *scikit-learn* package. Developed models are then used to calculate predict values. Performance of models is evaluated with <i>accuracy</i>, <i>mean absolute error (MAE)</i>, <i>mean square error (MSE)</i>, <i>root mean square error (RMSE)</i>, <i>R2</i> and <i>time</i>. Performance can be presented in values and also visually using <i>boxplot</i> or <i>lolipop</i> plot-type. True vs. predicted values can be obtained and also ploted with <i>line-scatter</i> plot. Also cycle time (true and predicted values) dependency of parameters can be observed visually with <i>line-scatter</i> plot. </p>
+</div >
+
+<p align="justify"> To develop surrogate models of piston cycle function with specified methods, we have used <i>scikit-learn</i> package. Developed models are then used to calculate predict values. Performance of models is evaluated with <i>accuracy</i>, <i>mean absolute error (MAE)</i>, <i>mean square error (MSE)</i>, <i>root mean square error (RMSE)</i>, <i>R2</i> and <i>time</i>. Performance can be presented in values and also visually using <i>boxplot</i> or <i>lolipop</i> plot-type. True vs. predicted values can be obtained and also ploted with <i>line-scatter</i> plot. Also cycle time (true and predicted values) dependency of parameters can be observed visually with <i>line-scatter</i> plot. </p>
 ## Requirements 
 This script requires the following modules:
  * [Numpy =  v1.22.4](https://numpy.org/)
