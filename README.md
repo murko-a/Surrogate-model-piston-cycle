@@ -47,6 +47,7 @@ Methods are in package functions used as:
 </div >
 
 <p align="justify"> To develop surrogate models of piston cycle function with specified methods, we have used <i>scikit-learn</i> package. Developed models are then used to calculate predict values. Performance of models is evaluated with <i>accuracy</i>, <i>mean absolute error (MAE)</i>, <i>mean square error (MSE)</i>, <i>root mean square error (RMSE)</i>, <i>R2</i> and <i>time</i>. Performance can be presented in values and also visually using <i>boxplot</i> or <i>lolipop</i> plot-type. True vs. predicted values can be obtained and also ploted with <i>line-scatter</i> plot. Also cycle time (true and predicted values) dependency of parameters can be observed visually with <i>line-scatter</i> plot. </p>
+
 ## Requirements 
 This script requires the following modules:
  * [Numpy =  v1.22.4](https://numpy.org/)
