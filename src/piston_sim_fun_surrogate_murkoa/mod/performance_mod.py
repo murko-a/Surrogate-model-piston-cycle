@@ -1,4 +1,3 @@
-from numpy import absolute
 from sklearn.model_selection import cross_val_score
 import pandas as pd
 import numpy as np
@@ -11,6 +10,41 @@ from box_plot import plot_boxplot
 from performance_calc import perf_calc
 
 def performance_fun(self, *models, perf_df, predict_data, plot_perf):
+    """Model performance evaluation function.
+
+    Function takes user-defined models from models option list,
+    boolean argument perf_df which returns performance dataframe if enabled,
+    array-like predict_data to predict and perform performance evaluation on 
+    that prediction, by	default is set to None and function takes parameter test 
+    data defined by running the class. With plot_perf argument can be defined which
+    performance plot should function returns. 
+
+    Args:
+        *models: Surrogate models argument list. 
+            Options:   "RFR" - Random Forrest Regression,
+                        "LR" - Linear Regression,
+                        "SVR" - Support Vector Regression,
+                        "KNR" - K Nearest Neighbour Regression
+
+        perf_df (bool): returns performance dataframe. Default is True.
+
+        predict_data (array-like): multiple dimension array of parameter values 
+            to predict piston cycle time, by defined models in *models argument.
+            Sub-array should have parameters organized as:
+                                    ["M","S", "V_0", "k", "P_0", "T_a", "T_0"].
+
+        plot_perf (str): returns performance plot. Default is None.
+            Plot options: ["boxplot", "lolipop"]
+
+    Returns:
+        Calculated performance of selected models and (if enabled) performance plot.
+
+    Raises:
+        AttributeError: The ``Raises`` section is a list of all exceptions
+            that are relevant to the interface.
+        ValueError: If `param2` is equal to `param1`.
+
+    """
     predict_data = predict_data or self.test_X
     self.mdls_pf = models
 
@@ -29,17 +63,27 @@ def performance_fun(self, *models, perf_df, predict_data, plot_perf):
 
     def plot_performance_lolipop(self, ordered_data_acc, ordered_data_mae, ordered_data_mse, 
     ordered_data_rmse, ordered_data_r2, ordered_data_time):
+        """
+		Function takes ordered performance results of accuracy, MAE, MSE, RMSE, R2
+        and time and returns lolipop plot of that results.
+
+		"""
         return plot_lolipop(self, od_acc = ordered_data_acc, od_mae = ordered_data_mae, od_mse = ordered_data_mse, 
             od_rmse = ordered_data_rmse, od_r2 = ordered_data_r2, od_time = ordered_data_time)
 
     def plot_performance_boxplot(self,results_mae, results_mse, results_rmse, results_r2):
+        """
+		Function takes performance results of MAE, MSE, RMSE, R2 and 
+        returns boxplot plot of that results.
+        
+		"""
         return plot_boxplot(self,res_mae = results_mae, res_mse = results_mse, res_rmse = results_rmse, res_r2 = results_r2)
 
-    if plot_perf == 'lolipop-plot':
+    if plot_perf == 'lolipop':
         plot_performance_lolipop(self, ordered_data_acc, ordered_data_mae, ordered_data_mse,
         ordered_data_rmse, ordered_data_r2, ordered_data_time)
 
-    elif plot_perf == 'box-plot':
+    elif plot_perf == 'boxplot':
         plot_performance_boxplot(self, results_mae, results_mse, results_rmse, results_r2)
 
     

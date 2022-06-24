@@ -10,16 +10,16 @@ def predict_mult_fun(self,  *models, predict_data):
     specified surrogate model.
 
     Args:
+        *models: Surrogate models argument list. 
+            Options:   "RFR" - Random Forrest Regression,
+                        "LR" - Linear Regression,
+                        "SVR" - Support Vector Regression,
+                        "KNR" - K Nearest Neighbour Regression
+                        
         predict_data (array-like): multiple dimension array of parameter values 
             to predict piston cycle time, by defined models in *models argument.
             Sub-array should have parameters organized as:
             ["M","S", "V_0", "k", "P_0", "T_a", "T_0"].
-
-        *models: Surrogate models argument list. 
-                Options:   "RFR" - Random Forrest Regression,
-                            "LR" - Linear Regression,
-                            "SVR" - Support Vector Regression,
-                            "KNR" - K Nearest Neighbour Regression
 
     Returns:
         Calculated predicted values of piston cycle time for every 

@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
+from plot_settings_mod import plot_settings
 
 def plot_lolipop(self, od_acc, od_mae, od_mse, od_rmse, od_r2, od_time):
     data_range=range(1,len(od_acc.index)+1)
-    fig, (ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(6, sharex=False, squeeze=True, figsize=(30, 30))
+    plot_settings();
+    fig, (ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(6, sharex=False, squeeze=True)
     fig.subplots_adjust(hspace=0.2)
 
     ax1.plot(list(od_acc['Accuracy']),data_range, "bo", zorder=1)
