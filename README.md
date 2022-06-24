@@ -1,4 +1,4 @@
-<div style="text-align: justify">  
+
 # Surrogate modeling of piston simulation function
 [![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub latest commit](https://badgen.net/github/last-commit/Naereen/Strapdown.js)](https://GitHub.com/Naereen/StrapDown.js/commit/)  [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
@@ -13,7 +13,8 @@
 * [Authors and acknowledgment](#authors-and-acknowledgment)
 
 ## General info
-This project is about surrogate modeling of piston simulation function that calculates cycle time of one piston rotation regarding multiple parameters. Project is based on a equations,
+<p align="justify"> This project is about surrogate modeling of piston simulation function that calculates cycle time of one piston rotation regarding multiple parameters. Project is based on a equations,</p>
+
 $$ C(x) = 2\pi \sqrt{{M \over k+S^2 \frac{P_0 V_0}{T_0} \frac{T_a}{V^2} }} , \text{where} $$
 $$ V = S \frac{S}{2k}\bigg(\sqrt{A^2 + 4k \frac{P_0 V_0}{T_0}T_a} -A \bigg)$$
 $$A = P_0S + 19.62 M - \frac{kV_0}{S}$$	
@@ -26,7 +27,8 @@ Symbols:
 * $T_a$ &nbsp; ambient temperature (K)
 * $T_0$ &nbsp; filling gas temperature (K)
 
-Upper equation for calculating the cycle time $C(x),$ in which piston complete one cycle, is very complex and time expensive to calculate, therefore surrogate models for that equation were developed in this project. In project we have used following surrogate modeling methods:
+<p align="justify"> Upper equation for calculating the cycle time <i>C(x)</i>, in which piston complete one cycle, is very complex and time expensive to calculate, therefore surrogate models for that equation were developed in this project. In project we have used following surrogate modeling methods: </p>
+
 * Linear Regression,
 * Random Forrest Regression,
 * Support Vector Regression,
@@ -41,7 +43,7 @@ Methods are in package functions used as:
 | Support Vector Regression   | "SVR"              |
 |K-Nearest Neighbors Regression   | "KNR"              |
 
-To develop surrogate models of piston cycle function with specified methods, we have used *scikit-learn* package. Developed models are then used to calculate predict values. Performance of models is evaluated with *accuracy*, *mean absolute error (MAE)*, *mean square error (MSE)*, *root mean square error (RMSE)*, *R2* and *time*. Performance can be presented in values and also visually using *boxplot* or *lolipop* plot-type. True vs. predicted values can be obtained and also ploted with *line-scatter* plot. Also cycle time (true and predicted values) dependency of parameters can be observed visually with *line-scatter* plot.
+<p align="justify"> To develop surrogate models of piston cycle function with specified methods, we have used *scikit-learn* package. Developed models are then used to calculate predict values. Performance of models is evaluated with <i>accuracy</i>, <i>mean absolute error (MAE)</i>, <i>mean square error (MSE)</i>, <i>root mean square error (RMSE)</i>, <i>R2</i> and <i>time</i>. Performance can be presented in values and also visually using <i>boxplot</i> or <i>lolipop</i> plot-type. True vs. predicted values can be obtained and also ploted with <i>line-scatter</i> plot. Also cycle time (true and predicted values) dependency of parameters can be observed visually with <i>line-scatter</i> plot. </p>
 ## Requirements 
 This script requires the following modules:
  * [Numpy =  v1.22.4](https://numpy.org/)
@@ -97,7 +99,8 @@ Than if you want to predict more values with defined parameter space, you can us
                     [30,0.009,0.004,4800,99000,296,348]])
  sm.predict_multiple('RFR','SVR' ,'KNR', predict_data = mult_data)
 ``` 
-If we want to get the performance evaluation of surrogate models and also plot it, we have two options of plot:
+<p align="justify">If we want to get the performance evaluation of surrogate models and also plot it, we have two options of plot:</p>
+
 * boxplot plot
 * lolipop plot
 
@@ -115,7 +118,8 @@ If we want to compare results of true and predicted values and also plot it:
 # plot of comparison
  sm.compare_true_pred('RFR','SVR', 'KNR', 'LR', plot = True, results = True)
 ```
-If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:
+<p align="justify">If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:</p>
+
 ```python
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values
@@ -127,7 +131,7 @@ sm.param_true_pred('RFR','SVR', 'KNR', plot_type = "all", results = True)
 sm.param_true_pred('RFR','SVR', 'KNR', plot_type = "M", results = True)
 ```
 ## Support
-If you come to any of issues, have problems with the script or have some other questions about the script please send us e-mail on anze.murko@rwth-aachen.com.
+<p align="justify">If you come to any of issues, have problems with the script or have some other questions about the script please send us e-mail on <a href = "mailto: anze.murko@rwth-aachen.com"> anze.murko@rwth-aachen.com </a>.</p>
 
 ## Roadmap
 In the future we want to develop script that will use more different surrogate methods as:
@@ -136,10 +140,9 @@ In the future we want to develop script that will use more different surrogate m
 * Bayesian Netorks, 
 etc.
 
-to model defined piston cycle function. We would also like to develop used surrogate modeling methods to perform better and also like to enable more options in training, prediction, plotting functions, that will be user-defined.
+<p align="justify">to model defined piston cycle function. We would also like to develop used surrogate modeling methods to perform better and also like to enable more options in training, prediction, plotting functions, that will be user-defined.</p>
 
 
 ## Authors and acknowledgment
-We would like to express our appreciation to the professor Anil Yildiz and asistant Hu Zhao for supporting and helping us with this project. 
+<p align="justify">We would like to express our appreciation to the professor Anil Yildiz and asistant Hu Zhao for supporting and helping us with this project. </p>
 
-</div>
