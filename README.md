@@ -109,17 +109,20 @@ Than if you want to predict more values with defined parameter space, you can us
 
 ```python
  #performance with boxplot plot
- sm.performance('RFR','SVR','KNR', 'SVR', perf_df=True, predict_data = None, plot_perf='boxplot')
+ sm.performance('RFR','SVR','KNR', 'SVR', 
+                perf_df=True, predict_data = None, plot_perf='boxplot')
 
  #performance with lolipop plot
- sm.performance('RFR','SVR','KNR', 'SVR', perf_df=True, predict_data = None, plot_perf='lolipop')
+ sm.performance('RFR','SVR','KNR', 'SVR', 
+                perf_df=True, predict_data = None, plot_perf='lolipop')
 ```
 If we want to compare results of true and predicted values and also plot it:
 ```python
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values and by enabling plot argument, function returns
 # plot of comparison
- sm.compare_true_pred('RFR','SVR', 'KNR', 'LR', plot = True, results = True)
+ sm.compare_true_pred('RFR','SVR', 'KNR', 'LR',
+                     plot = True, results = True)
 ```
 <p align="justify">If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:</p>
 
@@ -127,11 +130,13 @@ If we want to compare results of true and predicted values and also plot it:
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values
 # to see panel plot of all parameter dependencies you can choose "all"
-sm.param_true_pred('RFR','SVR', 'KNR', plot_type = "all", results = True)
+sm.param_true_pred('RFR','SVR', 'KNR', 
+                plot_type = "all", results = True)
 
 # to see plot of specified parameter dependency you can choose between defined
 # parameters ["M","S", "V_0", "k", "P_0", "T_a", "T_0"]
-sm.param_true_pred('RFR','SVR', 'KNR', plot_type = "M", results = True)
+sm.param_true_pred('RFR','SVR', 'KNR', 
+                plot_type = "M", results = True)
 ```
 ## Support
 <p align="justify">If you come to any of issues, have problems with the script or have some other questions about the script please send us e-mail on <a href = "mailto: anze.murko@rwth-aachen.com"> anze.murko@rwth-aachen.com </a>.</p>
