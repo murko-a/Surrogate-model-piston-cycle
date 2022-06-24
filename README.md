@@ -16,39 +16,54 @@ This project is about surrogate modeling of piston simulation function that calc
 	
 ## Requirements 
 This script requires the following modules:
- * [Numpy =  v1.1](https://numpy.org/)
- * [Pandas = v1.4.1](https://pandas.pydata.org/)
- * [Matplotlib = v3.5.1](https://matplotlib.org/)
- * [SkLearn = v1.7.3](https://scikit-learn.org/stable/)
- * [SMT: Surrogate Modeling Toolbox = v1.1](https://smt.readthedocs.io/en/latest/)
+ * [Numpy =  v1.22.4](https://numpy.org/)
+ * [PyYAML = v6.0](https://pyyaml.org/)
+ * [Pandas = v1.4.2](https://pandas.pydata.org/)
+ * [Matplotlib = v3.5.2](https://matplotlib.org/)
+ * [scikit-learn = v1.1.1](https://scikit-learn.org/stable/)
+ * [SMT: Surrogate Modeling Toolbox = v1.2.0](https://smt.readthedocs.io/en/latest/)
 	
 ## Setup
 To run this project, install it locally using pip:
 
 ```
-$ cd ../lorem
-$ pip install piston_cyc_sm
+$ pip install piston_fun_sm
 ```
 
 ## Code Examples
 Code to initially generate surrogate model:
- ```
- $ from piston_cyc_sm import SurrogateModel
- $ sm = SurrogateModel()
+ ```python
+ from piston_fun_sm import SurrogateModel
+
+ sm = SurrogateModel()
+
+ # or if you want to use your own parameter limit --> look .yml file in /data
+ my_par_yml = 'my_par.yml'
+ sm_yml = SurrogateModel(my_par_yml)
+
+ # or if you want to use your own parameter space --> look .csv file in /data
+ my_par_csv = 'my_par.csv'
+ sm_csv = SurrogateModel(my_par_csv)
  ```
  Then with difined surrogate model we can use internal functions. For example predict our own data:
+```python
+ data = [30,0.005,0.002,1000,90000,292,345]
+ sm.predict('RFR','SVR' ,'KNR', predict_data = data)
 ```
- $ data = [30,0.005,0.002,1000,90000,292,345]
- $ sm.predict('RFR','SVR' ,'KNR', predict_data = data)
-```
-If we want to get the performance of surrogate models and also plot it with box plot:
+If we want to get the performance evaluation of surrogate models and also plot it, we have two options of plot:
+* boxplot plot
+* lolipop plot
 
+```python
+ #performance with boxplot plot
+ sm.performance('RFR','SVR','KNR', 'SVR', perf_df=True, predict_data = None, plot_perf='boxplot')
+
+ #performance with lolipop plot
+ sm.performance('RFR','SVR','KNR', 'SVR', perf_df=True, predict_data = None, plot_perf='lolipop')
 ```
- $ sm.performance('RFR','SVR','KNR', 'SVR', plot_pf='boxplot')
-```
-If we want to compare of true and predicted values and also plot it.
-```
- $ sm.compare_true_pred('RFR','SVR', 'KNR', 'LR', plot_type='true-pred', df = True)
+If we want to compare results of true and predicted values and also plot it:
+```python
+ sm.compare_true_pred('RFR','SVR', 'KNR', 'LR', plot = True, results = True)
 ```
 ## Support
 If you come to any of issues, have problems with the script or have some other questions about the script please send us e-mail on anze.murko@rwth-aachen.com.
