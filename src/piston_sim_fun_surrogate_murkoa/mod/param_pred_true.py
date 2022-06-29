@@ -77,13 +77,15 @@ def param_true_pred_fun(self, *models, plot_type, results):
             defined parameter. 
 
             """
+            fig = plt.figure()
+            fig.suptitle('Dependence of the function on the parameter', fontsize=24)
             plt.plot(sorted_dfs[plt_typ][0],sorted_dfs[plt_typ][1], label = 'y_true');
             plot_settings();
             ss_df = sorted_dfs[plt_typ][2]
             for mm in mdls_pf:
                 plt.plot(sorted_dfs[plt_typ][0], ss_df[mm],'o', label = mm)
             plt.xlabel(plt_typ)
-            plt.ylabel('Cycle time')
+            plt.ylabel('Cycle time [s]')
             plt.legend()
             plt.show();
 
@@ -97,9 +99,10 @@ def param_true_pred_fun(self, *models, plot_type, results):
             parameter space. 
 
             """
-            plot_settings();
+            fig = plt.figure()
+            plot_settings(fig_size=(15,30));
             gs = gridspec.GridSpec(4, 2)
-            gs.update(wspace=0.2, hspace=0.2)
+            gs.update(wspace=0.2, hspace=0.5)
             ax1 = plt.subplot(gs[0,0])
             ax2 = plt.subplot(gs[0,1])
             ax3 = plt.subplot(gs[1,0])
@@ -110,12 +113,14 @@ def param_true_pred_fun(self, *models, plot_type, results):
             axs = [ax1, ax2, ax3, ax4, ax5, ax6, ax7]
             plt_types = ['M','S', 'V0', 'k', 'P0', 'Ta', 'T0']
             for ax, ptyp in zip(axs, plt_types):
+                ax.plot(sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], label = 'y_true', lw=0.35);
                 for mm in mdls_pf:
                     ss_df = sorted_dfs[ptyp][2]
-                    ax.plot(sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], label = 'y_true');
-                    ax.plot(sorted_dfs[ptyp][0], ss_df[mm], label = mm);
-                ax.set_xabel(ptyp)
-                ax.set_yabel('Cycle time')
+                    ax.plot(sorted_dfs[ptyp][0], ss_df[mm], "o", label = mm, markersize=2);
+                ax.set_xlabel(ptyp)
+            fig.supylabel('Cycle time [s]')
+            fig.suptitle('Dependence of the function on the parameters', fontsize=24)
+            plt.legend(loc="lower right")
             plt.show();
 
         plot_compare_y_parameter_all(mdls_pf, sorted_dfs)

@@ -3,9 +3,10 @@ from plot_settings_mod import plot_settings
 
 def plot_lolipop(self, od_acc, od_mae, od_mse, od_rmse, od_r2, od_time):
     data_range=range(1,len(od_acc.index)+1)
-    plot_settings();
+    plot_settings(fig_size=(15, 30));
     fig, (ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(6, sharex=False, squeeze=True)
-    fig.subplots_adjust(hspace=0.2)
+    fig.subplots_adjust(hspace=0.5)
+    fig.suptitle('Surrogate models performance', fontsize=24)
 
     ax1.plot(list(od_acc['Accuracy']),data_range, "bo", zorder=1)
     ax1.hlines(y=data_range, xmin=0, xmax=list(od_acc['Accuracy']), color='blue', zorder=0)
@@ -43,4 +44,6 @@ def plot_lolipop(self, od_acc, od_mae, od_mse, od_rmse, od_r2, od_time):
     ax6.set_yticklabels([i for i in list(od_time.index)])
     ax6.set_title('time')
     
+    fig.supylabel('Model')
+
     plt.show();

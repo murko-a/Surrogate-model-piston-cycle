@@ -59,10 +59,13 @@ def compare_true_pred_fun(self, *models, plot, results):
             plot_settings();
             fig, axs = plt.subplots(axs_size, sharex=True, squeeze=True)
             fig.subplots_adjust(hspace=0.2)
+            fig.suptitle('Comparison of true and predicted values', fontsize=24)
             for i, mm in zip(range(axs_size), mdls_pf):
-                axs[i].plot(united['y_true'], united['y_true'], '-', color='red')
-                axs[i].plot(united['y_true'], united[mm], 'o')
+                axs[i].plot(united['y_true'], united['y_true'], '-', color='red', label='true values')
+                axs[i].plot(united['y_true'], united[mm], 'o', label='predicted values',)
                 axs[i].set_title(mm)
+            fig.supxlabel('Cycle time [s]')
+            fig.supylabel('Cycle time [s]')
             plt.xlim([0.2,0.8])
             plt.show()
         plot_true_pred(mdls_pf)

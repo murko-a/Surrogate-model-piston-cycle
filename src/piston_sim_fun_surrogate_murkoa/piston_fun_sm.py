@@ -42,14 +42,17 @@ class SurrogateModel():
     file_name : str, default = "data/param_data.yml"
         File path of .yml file with defined limits of parameters or .csv file with defined
 		values of parameters --> look at example_parm.csv in "data/" folder
+    samples : int, default = 1000
+		Number of created samples by LHS method, if you provide limits of parameters in .yml file format.
     n_splt : int, default = 5
         Number of folds that KFold method should apply on dataset. Must be at least 2.
+	shuffle : bool, default=False
+		Whether to shuffle the data before splitting into batches.
+		Note that the samples within each split will not be shuffled   
     rand_state : int, default=None
 		When shuffle is True, random_state affects the ordering of the indices, 
 		which controls the randomness of each fold. Otherwise, this parameter has no effect.
-    shuffle : bool, default=False
-		Whether to shuffle the data before splitting into batches.
-		Note that the samples within each split will not be shuffled    
+ 
 
     Methods
     -------
@@ -76,7 +79,7 @@ class SurrogateModel():
 		prediction results can be obtained.
 	
     """
-	def __init__(self, file_name = None, n_splt=5, rand_state = None, shuff=False):
+	def __init__(self, file_name = None, samples = 1000, n_splt=5,  shuffle=False, rand_state = None):
 		self.file_name = file_name or os.path.join(os.getcwd(), "data/param_data.yml")
 		split_tup = os.path.splitext(self.file_name)
 		
@@ -85,9 +88,9 @@ class SurrogateModel():
 				with open(self.file_name,"r") as cfg_file:
 						self.config_yaml = yaml.safe_load(cfg_file)
 						self.config_yaml = self.config_yaml["surrogate-model-limits"]
-			if split_tup[1] == ".csv":
-					with open(self.file_name,"r") as cfg_file:
-						self.config_csv = pd.read_csv(cfg_file, delimiter=" ")
+			elif split_tup[1] == ".csv":
+					self.config_csv = pd.read_csv(file_name, delimiter=",", header=None, names=["M","S", "V_0", "k", "P_0", "T_a", "T_0"])
+
 		except FileNotFoundError as fe: 
 			print("Config not found")
 			sys.exit(2)
@@ -96,10 +99,11 @@ class SurrogateModel():
 			self.xlimits = np.array([self.config_yaml["M"], self.config_yaml["S"], self.config_yaml["V_0"], self.config_yaml["k"],
 			self.config_yaml["P_0"], self.config_yaml["T_a"], self.config_yaml["T_0"]])
 			self.sampling = LHS(xlimits = self.xlimits)
-			self.x = self.sampling(1000)
+			self.x = self.sampling(samples)
 			self.dataset = pd.DataFrame(self.x, columns=["M","S", "V_0", "k", "P_0", "T_a", "T_0"])
 		elif hasattr(self, "config_csv") :
-			self.dataset = pd.DataFrame(self.config_csv, columns=["M","S", "V_0", "k", "P_0", "T_a", "T_0"])
+			self.dataset = pd.DataFrame(self.config_csv)
+
 
 		self.dataset["A"] = self.dataset["P_0"]*self.dataset["S"] + 19.62*self.dataset["M"] - (self.dataset["k"]*self.dataset["V_0"])/self.dataset["S"]
 		self.dataset["V"] = self.dataset["S"]/(2*self.dataset["k"])*(np.sqrt(self.dataset["A"]**2 
@@ -112,7 +116,7 @@ class SurrogateModel():
 		self.X = self.dataset.iloc[:, 0:7].values
 		self.y = self.dataset.iloc[:, 9].values
 
-		self.kfold = KFold(n_splits=n_splt, shuffle=True, random_state=rand_state, shuffle=shuff)
+		self.kfold = KFold(n_splits=n_splt, shuffle=shuffle, random_state=rand_state)
 
 		for train_ix, test_ix in self.kfold.split(self.X):
 			self.train_X, self.test_X = self.X[train_ix], self.X[test_ix]
@@ -306,3 +310,5 @@ class SurrogateModel():
 
 		"""
 		return param_true_pred_fun(self, *models, plot_type = plot_type, results = results)
+
+        
