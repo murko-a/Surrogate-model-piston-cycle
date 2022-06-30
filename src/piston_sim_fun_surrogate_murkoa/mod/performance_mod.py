@@ -9,15 +9,14 @@ from lolipop_plot import plot_lolipop
 from box_plot import plot_boxplot
 from performance_calc import perf_calc
 
-def performance_fun(self, *models, perf_df, predict_data, plot_perf):
+def performance_fun(self, *models, perf_df, plot_perf):
     """Model performance evaluation function.
 
     Function takes user-defined models from models option list,
     boolean argument perf_df which returns performance dataframe if enabled,
-    array-like predict_data to predict and perform performance evaluation on 
-    that prediction, by	default is set to None and function takes parameter test 
-    data defined by running the class. With plot_perf argument can be defined which
-    performance plot should function returns. 
+    function uses parameter test data defined by running the class to predict 
+    and perform performance evaluation on that prediction. With plot_perf 
+    argument can be defined which performance plot should function returns. 
 
     Args:
         *models: Surrogate models argument list. 
@@ -28,26 +27,14 @@ def performance_fun(self, *models, perf_df, predict_data, plot_perf):
 
         perf_df (bool): returns performance dataframe. Default is True.
 
-        predict_data (array-like): multiple dimension array of parameter values 
-            to predict piston cycle time, by defined models in *models argument.
-            Sub-array should have parameters organized as:
-                                    ["M","S", "V_0", "k", "P_0", "T_a", "T_0"].
-
         plot_perf (str): returns performance plot. Default is None.
             Plot options: ["boxplot", "lolipop"]
 
     Returns:
         Calculated performance of selected models and (if enabled) performance plot.
 
-    Raises:
-        AttributeError: The ``Raises`` section is a list of all exceptions
-            that are relevant to the interface.
-        ValueError: If `param2` is equal to `param1`.
-
     """
-    predict_data = predict_data or self.test_X
     self.mdls_pf = models
-
     performance_df, results_mae, results_mse, results_rmse, results_r2 = perf_calc(self)
 
     if perf_df == True:

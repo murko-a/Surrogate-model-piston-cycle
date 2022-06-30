@@ -32,51 +32,35 @@ from predict_mult_mod import predict_mult_fun
 from param_pred_true import param_true_pred_fun
 
 class SurrogateModel():
-	"""
-    A class to develop surrogate model of piston simulation function.
+	"""Surrogate modelling of piston simulation function
 
-    ...
+    This module is created to develop surrogate model of piston simulation function, to evaluate
+	prediction of the function result value, with defined parameters, faster that in general 
+	calculation methods. Module also performs performance overview of the used surrogate modeling 
+	methods and enables to compare true and predicted values of the function and also compare that
+	with defined parameter values.
 
-    Attributes
-    ----------
-    file_name : str, default = "data/param_data.yml"
-        File path of .yml file with defined limits of parameters or .csv file with defined
-		values of parameters --> look at example_parm.csv in "data/" folder
-    samples : int, default = 1000
-		Number of created samples by LHS method, if you provide limits of parameters in .yml file format.
-    n_splt : int, default = 5
-        Number of folds that KFold method should apply on dataset. Must be at least 2.
-	shuffle : bool, default=False
-		Whether to shuffle the data before splitting into batches.
-		Note that the samples within each split will not be shuffled   
-    rand_state : int, default=None
-		When shuffle is True, random_state affects the ordering of the indices, 
-		which controls the randomness of each fold. Otherwise, this parameter has no effect.
- 
+	Example:
+			$ from piston_fun_sm import SurrogateModel
+			$ path = r'C:\..\param_data.yml'
+			$ sm = SurrogateModel(file_name = path, samples = 200, n_splt = 5,
+									 shuffle= True, rand_state = True)
+			$ sm.performance("RFR","SVR", "LR", plot_type = "boxplot")
 
-    Methods
-    -------
-	show_folds_class():
-		Returns number of KFold() generated folds --> number of splits.
-
-	def predict(*mdls, predict_data):
-		Takes predict_data dataset and returns predicted by models defined in *mdls
-
-	def performance(*mdls_pf, perf_df = False, predict_data = None, plot_perf = None):
-		Takes trained data defined by defining SurrogateModel() and perform a performance of 
-		surrogate models in *mdls_pf. Evaluation of performance can be done with defined predict_data
-		dataset or by default test data	defined by defining SurrogateModel().
-		Performance evaluation results can be presented by enabling perf_df argument.
-		Performance evaluation results can be ploted with argument 
-		plot_perf --> {"box-plot" or "lolipop-plot"}.
-	
-	def compare_true_pred(*mdls_pf, plot_type = None, df = False):
-		Takes trained data and test data defined by defining SurrogateModel() and surrogate models
-		in *mdls_pf and perform comparison of prediction results and true values of defined 
-		surrogate models. Argument plot_type has multiple options for parameter vs. piston cycle time
-		comparison --> {"M","S", "V0", "k", "P0", "Ta", "T0"} or option "true-pred" which returns
-		comparison of true values vs predicted values. With enabling df argument, 
-		prediction results can be obtained.
+    Attributes:
+		file_name : str, default = "data/param_data.yml"
+			File path of .yml file with defined limits of parameters or .csv file with defined
+			values of parameters --> look at example_parm.csv in "data/" folder
+		samples : int, default = 1000
+			Number of created samples by LHS method, if you provide limits of parameters in .yml file format.
+		n_splt : int, default = 5
+			Number of folds that KFold method should apply on dataset. Must be at least 2.
+		shuffle : bool, default=False
+			Whether to shuffle the data before splitting into batches.
+			Note that the samples within each split will not be shuffled   
+		rand_state : int, default=None
+			When shuffle is True, random_state affects the ordering of the indices, 
+			which controls the randomness of each fold. Otherwise, this parameter has no effect.
 	
     """
 	def __init__(self, file_name = None, samples = 1000, n_splt=5,  shuffle=False, rand_state = None):
@@ -164,12 +148,20 @@ class SurrogateModel():
 			Calculated true and predicted values of piston cycle time.
 
 		Raises:
-			AttributeError: The ``Raises`` section is a list of all exceptions
-				that are relevant to the interface.
-			ValueError: If `param2` is equal to `param1`.
+			KeyError: If item in `models` is not defined in package description.
+			Exception: If there is not enough parameter defined in 'predict_data', data is not shape (,7)
 
 		"""
-		return predict_fun(self, *models, predict_data = predict_data)
+		for model in models:
+			if model not in ["RFR","LR", "SVR", "KNR"]:
+				raise KeyError("Defined models not in this package.")
+			else:
+				pass
+		if len(predict_data) is not 7:
+			raise Exception("There is not enough parameters defined in predict_data. Parameter \
+				data to perform prediction is not right shape, it must be shape-like (, 7).")
+		else:
+			return predict_fun(self, *models, predict_data = predict_data)
 
 	def predict_multiple(self, *models, predict_data):
 		"""Multiple prediction function.
@@ -196,22 +188,32 @@ class SurrogateModel():
 			specified surrogate model.
 
 		Raises:
-			AttributeError: The ``Raises`` section is a list of all exceptions
-				that are relevant to the interface.
-			ValueError: If `param2` is equal to `param1`.
+			KeyError: If item in `models` is not defined in package description.
+			TypeError: If `predict_data` is not type of numpy.ndarray.
+			Exception: If there is not enough parameter defined in 'predict_data', data is not shape (,7)
 
 		"""
-		return predict_mult_fun(self, *models, predict_data = predict_data)
+		for model in models:
+			if model not in ["RFR","LR", "SVR", "KNR"]:
+				raise KeyError("Defined models not in this package.")
+			else:
+				pass
+		if type(predict_data) is not np.ndarray:
+			raise TypeError("Parameter data to perform prediction is not type of numpy.ndarray")
+		if predict_data.shape[1] is not 7:
+			raise Exception("There is not enough parameters defined in predict_data. Parameter \
+				data to perform prediction is not right shape, it must be shape-like (, 7).")
+		else:
+			return predict_mult_fun(self, *models, predict_data = predict_data)
 		
-	def performance(self, *models, perf_df=True, predict_data = None, plot_perf = None):
+	def performance(self, *models, perf_df=True, plot_type = None):
 		"""Model performance evaluation function.
 
 		Function takes user-defined models from models option list,
 		boolean argument perf_df which returns performance dataframe if enabled,
-		array-like predict_data to predict and perform performance evaluation on 
-		that prediction, by	default is set to None and function takes parameter test 
-		data defined by running the class. With plot_perf argument can be defined which
-		performance plot should function returns. 
+		function uses parameter test data defined by running the class to predict 
+		and perform performance evaluation on that prediction. With plot_perf 
+		argument can be defined which performance plot should function returns. 
 
 		Args:
 			*models: Surrogate models argument list. 
@@ -222,24 +224,27 @@ class SurrogateModel():
 
 			perf_df (bool): returns performance dataframe. Default is True.
 
-			predict_data (array-like): multiple dimension array of parameter values 
-				to predict piston cycle time, by defined models in *models argument.
-				Sub-array should have parameters organized as:
-										["M","S", "V_0", "k", "P_0", "T_a", "T_0"].
-
-			plot_perf (str): returns performance plot. Default is None.
+			plot_type (str): returns performance plot. Default is None.
 				Plot options: ["boxplot", "lolipop"]
 
 		Returns:
 			Calculated performance of selected models and (if enabled) performance plot.
 
 		Raises:
-			AttributeError: The ``Raises`` section is a list of all exceptions
-				that are relevant to the interface.
-			ValueError: If `param2` is equal to `param1`.
+			KeyError: If item in `models` is not defined in package description.
+			KeyError: If used plot type in `plot_type` parameter is not defined 
+					in package description.
 
 		"""
-		return performance_fun(self, *models, perf_df = perf_df, predict_data = predict_data, plot_perf = plot_perf)
+		for model in models:
+			if model not in ["RFR","LR", "SVR", "KNR"]:
+				raise KeyError("Defined models not in this package.")
+			else:
+				pass
+		if plot_type not in ["boxplot", "lolipop"]:
+			raise KeyError("Defined plot type not in this package.")
+		else:
+			return performance_fun(self, *models, perf_df = perf_df, plot_perf = plot_type)
 
 	def compare_true_pred(self, *models, plot = True, results = True):
 		"""Comparison of true and predicted values function.
@@ -268,12 +273,17 @@ class SurrogateModel():
 			of selected models and comparison true vs. predicted values plot.
 
 		Raises:
-			AttributeError: The ``Raises`` section is a list of all exceptions
-				that are relevant to the interface.
-			ValueError: If `param2` is equal to `param1`.
+			KeyError: If item in `models` is not defined in package description.
 
 		"""
-		return compare_true_pred_fun(self, *models, plot = plot, results = results)
+		for model in models:
+			if model not in ["RFR","LR", "SVR", "KNR"]:
+				raise KeyError("Defined models not in this package.")
+			else:
+				pass
+		else:
+			return compare_true_pred_fun(self, *models, plot = plot, results = results)
+		
 
 	def param_true_pred(self, *models, plot_type = "all", results = True):
 		"""Comparison of true and predicted values function.
@@ -304,11 +314,19 @@ class SurrogateModel():
 			of selected models and  true/predicted values vs. parameter plot.
 
 		Raises:
-			AttributeError: The ``Raises`` section is a list of all exceptions
-				that are relevant to the interface.
-			ValueError: If `param2` is equal to `param1`.
+			KeyError: If item in `models` is not defined in package description.
+			KeyError: If used plot type in `plot_type` parameter is not defined 
+					in package description.
 
 		"""
-		return param_true_pred_fun(self, *models, plot_type = plot_type, results = results)
+		for model in models:
+			if model not in ["RFR","LR", "SVR", "KNR"]:
+				raise KeyError("Defined models not in this package.")
+			else:
+				pass
+		if plot_type not in ["all","M","S", "V_0", "k", "P_0", "T_a", "T_0"]:
+			raise KeyError("Defined plot type not in this package.")
+		else:
+			return param_true_pred_fun(self, *models, plot_type = plot_type, results = results)
 
         
