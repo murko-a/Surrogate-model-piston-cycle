@@ -42,7 +42,7 @@ class SurrogateModel():
 
 	Example:
 			$ from piston_fun_sm import SurrogateModel
-			$ path = r'C:\..\param_data.yml'
+			$ path = r"C:\..\param_data.yml"
 			$ sm = SurrogateModel(file_name = path, samples = 200, n_splt = 5,
 									 shuffle= True, rand_state = True)
 			$ sm.performance("RFR","SVR", "LR", plot_type = "boxplot")
@@ -149,7 +149,7 @@ class SurrogateModel():
 
 		Raises:
 			KeyError: If item in `models` is not defined in package description.
-			Exception: If there is not enough parameter defined in 'predict_data', data is not shape (,7)
+			Exception: If there is not enough parameter defined in "predict_data", data is not shape (,7)
 
 		"""
 		for model in models:
@@ -190,7 +190,7 @@ class SurrogateModel():
 		Raises:
 			KeyError: If item in `models` is not defined in package description.
 			TypeError: If `predict_data` is not type of numpy.ndarray.
-			Exception: If there is not enough parameter defined in 'predict_data', data is not shape (,7)
+			Exception: If there is not enough parameter defined in "predict_data", data is not shape (,7)
 
 		"""
 		for model in models:

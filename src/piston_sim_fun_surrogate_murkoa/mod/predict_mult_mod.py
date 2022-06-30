@@ -42,4 +42,4 @@ def predict_mult_fun(self,  *models, predict_data):
         prediction_df[col_name] = pred
     dfs = [predict_data_df,prediction_df]
     pred_return = pd.concat(dfs, axis=1)
-    print(tabulate(pred_return, headers = 'keys', tablefmt = 'psql'))
+    print(tabulate(pred_return, headers = "keys", tablefmt = "psql"))

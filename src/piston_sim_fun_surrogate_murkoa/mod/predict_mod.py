@@ -35,7 +35,7 @@ def predict_fun(self,  *models, predict_data):
     C = 2*np.pi * np.sqrt(predict_data[0]/(predict_data[3]
                                             + (predict_data[1]**2*predict_data[4]*predict_data[2]*predict_data[5])
                                             /(predict_data[6]*V**2)))
-    print('True value: {t:8.2f}'.format(t = C), '\n--------------------------------------')
+    print("True value: {t:8.2f}".format(t = C), "\n--------------------------------------")
     predict_data = np.array([predict_data])
     predictions = list()
     for mm in models:
