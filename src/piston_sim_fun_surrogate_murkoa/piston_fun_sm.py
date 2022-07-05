@@ -20,7 +20,6 @@ import yaml
 import os
 
 import sys
-sys.path.append("mod")
 from mod.show_folds_mod import show_folds_fun
 from mod.compare_true_pred_mod import compare_true_pred_fun
 from mod.performance_mod import performance_fun
