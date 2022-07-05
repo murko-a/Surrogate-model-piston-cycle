@@ -16,7 +16,7 @@ setup(
 
     name="piston_sim_fun_surrogate_murkoa",  
 
-    version="2.0.0", 
+    version="0.0.3", 
 
     description="Python package for surrogate modeling of piston simulation function",
 

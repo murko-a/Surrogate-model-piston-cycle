@@ -4,13 +4,15 @@
 
 
 ## Table of contents
-* [General info](#general-info)
-* [Requirements ](#requirements)
-* [Setup](#setup)
-* [Code Examples](#code-examples)
-* [Support](#support)
-* [Roadmap](#roadmap)
-* [Authors and acknowledgment](#authors-and-acknowledgment)
+- [Surrogate modeling of piston simulation function](#surrogate-modeling-of-piston-simulation-function)
+  - [Table of contents](#table-of-contents)
+  - [General info](#general-info)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+  - [Code Examples](#code-examples)
+  - [Support](#support)
+  - [Roadmap](#roadmap)
+  - [Authors and acknowledgment](#authors-and-acknowledgment)
 
 ## General info
 <p align="justify"> This project is about surrogate modeling of piston simulation function that calculates cycle time of one piston rotation regarding multiple parameters. Project is based on a equations,</p>
@@ -111,11 +113,11 @@ Than if you want to predict more values with defined parameter space, you can us
 ```python
  #performance with boxplot plot
  sm.performance('RFR','SVR','KNR', 'SVR', 
-                perf_df=True, predict_data = None, plot_perf='boxplot')
+                perf_df=True, predict_data = None, plot_type='boxplot')
 
  #performance with lolipop plot
  sm.performance('RFR','SVR','KNR', 'SVR', 
-                perf_df=True, predict_data = None, plot_perf='lolipop')
+                perf_df=True, predict_data = None, plot_type='lolipop')
 ```
 If we want to compare results of true and predicted values and also plot it:
 ```python
