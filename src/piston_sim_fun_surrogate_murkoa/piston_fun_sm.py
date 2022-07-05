@@ -8,28 +8,26 @@ Simon Fraser University, accessed 18 June 2022, <https://www.sfu.ca/~ssurjano/pi
 
 """
 
-from param_pred_true import param_true_pred_fun
-from predict_mult_mod import predict_mult_fun
-from predict_mod import predict_fun
-from performance_mod import performance_fun
-from compare_true_pred_mod import compare_true_pred_fun
-from show_folds_mod import show_folds_fun
-import os
-import sys
-from sklearn.utils import shuffle
-import yaml
-import csv
-import pandas as pd
-import numpy as np
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.model_selection import KFold
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.ensemble import RandomForestRegressor
 from smt.sampling_methods import LHS
-import sys
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import KFold
+from sklearn.neighbors import KNeighborsRegressor
+import numpy as np
+import pandas as pd
+import yaml
+import os
 
+import sys
 sys.path.append("mod")
+from mod.show_folds_mod import show_folds_fun
+from mod.compare_true_pred_mod import compare_true_pred_fun
+from mod.performance_mod import performance_fun
+from mod.predict_mod import predict_fun
+from mod.predict_mult_mod import predict_mult_fun
+from mod.param_pred_true import param_true_pred_fun
+
 
 
 class SurrogateModel():
@@ -183,7 +181,7 @@ Attributes:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
-        if len(predict_data) is not 7:
+        if len(predict_data) != 7:
             raise Exception(
                 "There is not enough parameters defined in predict_data. Parameter \
 				data to perform prediction is not right shape, it must be shape-like (, 7).")
@@ -228,7 +226,7 @@ Attributes:
         if not isinstance(predict_data, np.ndarray):
             raise TypeError(
                 "Parameter data to perform prediction is not type of numpy.ndarray")
-        if predict_data.shape[1] is not 7:
+        if predict_data.shape[1] != 7:
             raise Exception(
                 "There is not enough parameters defined in predict_data. Parameter \
 				data to perform prediction is not right shape, it must be shape-like (, 7).")
