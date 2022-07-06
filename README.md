@@ -82,12 +82,12 @@ Code to initially generate surrogate model:
 
   
  # if you want to use your own parameter limit --> look .yml file in /data
- my_par_yml = 'my_par.yml'
- sm_yml = SurrogateModel(my_par_yml, n_splt = 10, rand_state = 42, shuff = True)
+ my_par_yml = "my_par.yml"
+ sm_yml = SurrogateModel(my_par_yml, n_splt = 10, shuffle = True, rand_state = 42)
 
  # if you want to use your own parameter space --> look .csv file in /data
- my_par_csv = 'my_par.csv'
- sm_csv = SurrogateModel(my_par_csv, n_splt = 10, rand_state = 42, shuff = True)
+ my_par_csv = "my_par.csv"
+ sm_csv = SurrogateModel(my_par_csv, n_splt = 10, shuffle = True, rand_state = 42)
  ```
  If you want to see folds that were created by KFold method and number of data values in these folds you can use:
  ```python
@@ -96,14 +96,14 @@ Code to initially generate surrogate model:
  Then with difined surrogate model we can use internal functions. For example quick prediction of your own data:
 ```python
  data = [30,0.005,0.002,1000,90000,292,345]
- sm.predict('RFR','SVR' ,'KNR', predict_data = data)
+ sm.predict("RFR","SVR" ,"KNR", predict_data = data)
 ```
 Than if you want to predict more values with defined parameter space, you can use:
 ```python
  mult_data = np.array([[30,0.005,0.002,1000,90000,292,345],
                     [30,0.015,0.008,2000,105000,293,355],
                     [30,0.009,0.004,4800,99000,296,348]])
- sm.predict_multiple('RFR','SVR' ,'KNR', predict_data = mult_data)
+ sm.predict_multiple("RFR","SVR" ,"KNR", predict_data = mult_data)
 ``` 
 <p align="justify">If we want to get the performance evaluation of surrogate models and also plot it, we have two options of plot:</p>
 
@@ -112,19 +112,19 @@ Than if you want to predict more values with defined parameter space, you can us
 
 ```python
  #performance with boxplot plot
- sm.performance('RFR','SVR','KNR', 'SVR', 
-                perf_df=True, predict_data = None, plot_type='boxplot')
+ sm.performance("RFR","SVR","KNR", "SVR", 
+                perf_df=True, predict_data = None, plot_type="boxplot")
 
  #performance with lolipop plot
- sm.performance('RFR','SVR','KNR', 'SVR', 
-                perf_df=True, predict_data = None, plot_type='lolipop')
+ sm.performance("RFR","SVR","KNR", "SVR", 
+                perf_df=True, predict_data = None, plot_type="lolipop")
 ```
 If we want to compare results of true and predicted values and also plot it:
 ```python
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values and by enabling plot argument, function returns
 # plot of comparison
- sm.compare_true_pred('RFR','SVR', 'KNR', 'LR',
+ sm.compare_true_pred("RFR","SVR", "KNR", "LR",
                      plot = True, results = True)
 ```
 <p align="justify">If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:</p>
@@ -133,12 +133,12 @@ If we want to compare results of true and predicted values and also plot it:
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values
 # to see panel plot of all parameter dependencies you can choose "all"
-sm.param_true_pred('RFR','SVR', 'KNR', 
+sm.param_true_pred("RFR","SVR", "KNR", 
                 plot_type = "all", results = True)
 
 # to see plot of specified parameter dependency you can choose between defined
 # parameters ["M","S", "V_0", "k", "P_0", "T_a", "T_0"]
-sm.param_true_pred('RFR','SVR', 'KNR', 
+sm.param_true_pred("RFR","SVR", "KNR", 
                 plot_type = "M", results = True)
 ```
 ## Support
