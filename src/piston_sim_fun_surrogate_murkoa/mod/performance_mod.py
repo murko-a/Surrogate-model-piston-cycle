@@ -8,6 +8,7 @@ from tabulate import tabulate
 from lolipop_plot import plot_lolipop
 from box_plot import plot_boxplot
 from performance_calc import perf_calc
+from spyderweb_plot import plot_spyderweb
 
 
 def performance_fun(self, *models, perf_df, plot_perf):
@@ -93,6 +94,14 @@ def performance_fun(self, *models, perf_df, plot_perf):
             res_rmse=results_rmse,
             res_r2=results_r2)
 
+    def plot_performance_spyderweb(self, performance_df):
+                """
+                Function takes performance results and
+        returns spyderweb plot of that results. Spyderweb plot presents normalized values of results.
+
+                """
+                return plot_spyderweb(self, performance_df = performance_df)
+
     if plot_perf == "lolipop":
         plot_performance_lolipop(
             self,
@@ -110,3 +119,7 @@ def performance_fun(self, *models, perf_df, plot_perf):
             results_mse,
             results_rmse,
             results_r2)
+
+    elif plot_perf == "spyderweb":
+        plot_performance_spyderweb(self, performance_df)
+

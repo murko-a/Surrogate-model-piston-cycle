@@ -20,12 +20,12 @@ import yaml
 import os
 import sys
 sys.path.append("mod")
-from mod.param_pred_true import param_true_pred_fun
-from mod.predict_mult_mod import predict_mult_fun
-from mod.predict_mod import predict_fun
-from mod.performance_mod import performance_fun
-from mod.compare_true_pred_mod import compare_true_pred_fun
 from mod.show_folds_mod import show_folds_fun
+from mod.compare_true_pred_mod import compare_true_pred_fun
+from mod.performance_mod import performance_fun
+from mod.predict_mod import predict_fun
+from mod.predict_mult_mod import predict_mult_fun
+from mod.param_pred_true import param_true_pred_fun
 
 class SurrogateModel():
     """Surrogate modelling of piston simulation function
@@ -249,7 +249,7 @@ Attributes:
                 perf_df (bool): returns performance dataframe. Default is True.
 
                 plot_type (str): returns performance plot. Default is None.
-                        Plot options: ["boxplot", "lolipop"]
+                        Plot options: ["boxplot", "lolipop", "spyderweb"]
 
         Returns:
                 Calculated performance of selected models and (if enabled) performance plot.
@@ -265,7 +265,7 @@ Attributes:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
-        if plot_type not in ["boxplot", "lolipop"]:
+        if plot_type not in ["boxplot", "lolipop", "spyderweb"]:
             raise KeyError("Defined plot type not in this package.")
         else:
             return performance_fun(

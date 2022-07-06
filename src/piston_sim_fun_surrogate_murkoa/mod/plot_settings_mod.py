@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def plot_settings(fig_size=(20, 10)):
+def plot_settings(fig_size=(20, 20)):
     """
     Function that defines settings for every plot in package.
     """

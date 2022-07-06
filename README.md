@@ -118,6 +118,10 @@ Than if you want to predict more values with defined parameter space, you can us
  #performance with lolipop plot
  sm.performance("RFR","SVR","KNR", "SVR", 
                 perf_df=True, predict_data = None, plot_type="lolipop")
+
+ #performance with lolipop plot
+ sm.performance("RFR","SVR","KNR", "SVR", 
+                perf_df=True, predict_data = None, plot_type="spyderweb")
 ```
 If we want to compare results of true and predicted values and also plot it:
 ```python
