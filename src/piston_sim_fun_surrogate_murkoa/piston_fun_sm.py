@@ -18,16 +18,14 @@ import numpy as np
 import pandas as pd
 import yaml
 import os
-
 import sys
-from mod.show_folds_mod import show_folds_fun
-from mod.compare_true_pred_mod import compare_true_pred_fun
-from mod.performance_mod import performance_fun
-from mod.predict_mod import predict_fun
-from mod.predict_mult_mod import predict_mult_fun
+sys.path.append("mod")
 from mod.param_pred_true import param_true_pred_fun
-
-
+from mod.predict_mult_mod import predict_mult_fun
+from mod.predict_mod import predict_fun
+from mod.performance_mod import performance_fun
+from mod.compare_true_pred_mod import compare_true_pred_fun
+from mod.show_folds_mod import show_folds_fun
 
 class SurrogateModel():
     """Surrogate modelling of piston simulation function
