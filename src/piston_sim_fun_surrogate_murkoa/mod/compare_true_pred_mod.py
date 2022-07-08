@@ -17,7 +17,7 @@ def compare_true_pred_fun(self, *models, plot, results):
     Args:
         *models: Surrogate models argument list.
             Options:   "RFR" - Random Forrest Regression,
-                        "LR" - Linear Regression,
+                        "MLR" - Multiple Linear Regression,
                         "SVR" - Support Vector Regression,
                         "KNR" - K Nearest Neighbour Regression
 

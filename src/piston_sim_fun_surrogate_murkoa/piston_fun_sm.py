@@ -41,7 +41,7 @@ This module is created to develop surrogate model of piston simulation function,
                     $ path = r"C:\\..\\param_data.yml"
                     $ sm = SurrogateModel(file_name = path, samples = 200, n_splt = 5,
                                                                      shuffle= True, rand_state = True)
-                    $ sm.performance("RFR","SVR", "LR", plot_type = "boxplot")
+                    $ sm.performance("RFR","SVR", "MLR", plot_type = "boxplot")
 
 Attributes:
             file_name : str, default = "data/param_data.yml"
@@ -129,7 +129,7 @@ Attributes:
 
         self.models = {"RFR": RandomForestRegressor(),
                        "SVR": SVR(),
-                       "LR": LinearRegression(),
+                       "MLR": LinearRegression(),
                        "KNR": KNeighborsRegressor()
                        }
 
@@ -161,7 +161,7 @@ Attributes:
 
                 *models: Surrogate models argument list.
                                 Options:   "RFR" - Random Forrest Regression,
-                                                        "LR" - Linear Regression,
+                                                        "MLR" - Multiple Linear Regression,
                                                         "SVR" - Support Vector Regression,
                                                         "KNR" - K Nearest Neighbour Regression
 
@@ -174,7 +174,7 @@ Attributes:
 
         """
         for model in models:
-            if model not in ["RFR", "LR", "SVR", "KNR"]:
+            if model not in ["RFR", "MLR", "SVR", "KNR"]:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
@@ -201,7 +201,7 @@ Attributes:
 
                 *models: Surrogate models argument list.
                                 Options:   "RFR" - Random Forrest Regression,
-                                                        "LR" - Linear Regression,
+                                                        "MLR" - Multiple Linear Regression,
                                                         "SVR" - Support Vector Regression,
                                                         "KNR" - K Nearest Neighbour Regression
 
@@ -216,7 +216,7 @@ Attributes:
 
         """
         for model in models:
-            if model not in ["RFR", "LR", "SVR", "KNR"]:
+            if model not in ["RFR", "MLR", "SVR", "KNR"]:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
@@ -242,7 +242,7 @@ Attributes:
         Args:
                 *models: Surrogate models argument list.
                         Options:   "RFR" - Random Forrest Regression,
-                                                "LR" - Linear Regression,
+                                                "MLR" - Multiple Linear Regression,
                                                 "SVR" - Support Vector Regression,
                                                 "KNR" - K Nearest Neighbour Regression
 
@@ -261,7 +261,7 @@ Attributes:
 
         """
         for model in models:
-            if model not in ["RFR", "LR", "SVR", "KNR"]:
+            if model not in ["RFR", "MLR", "SVR", "KNR"]:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
@@ -283,7 +283,7 @@ Attributes:
         Args:
                 *models: Surrogate models argument list.
                         Options:   "RFR" - Random Forrest Regression,
-                                                "LR" - Linear Regression,
+                                                "MLR" - Multiple Linear Regression,
                                                 "SVR" - Support Vector Regression,
                                                 "KNR" - K Nearest Neighbour Regression
 
@@ -302,7 +302,7 @@ Attributes:
 
         """
         for model in models:
-            if model not in ["RFR", "LR", "SVR", "KNR"]:
+            if model not in ["RFR", "MLR", "SVR", "KNR"]:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
@@ -322,7 +322,7 @@ Attributes:
         Args:
                 *models: Surrogate models argument list.
                                 Options:   "RFR" - Random Forrest Regression,
-                                                        "LR" - Linear Regression,
+                                                        "MLR" - Multiple Linear Regression,
                                                         "SVR" - Support Vector Regression,
                                                         "KNR" - K Nearest Neighbour Regression
 
@@ -345,7 +345,7 @@ Attributes:
 
         """
         for model in models:
-            if model not in ["RFR", "LR", "SVR", "KNR"]:
+            if model not in ["RFR", "MLR", "SVR", "KNR"]:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass

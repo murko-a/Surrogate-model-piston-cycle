@@ -31,7 +31,7 @@ Symbols:
 
 <p align="justify"> Upper equation for calculating the cycle time <i>C(x)</i>, in which piston complete one cycle, is very complex and time expensive to calculate, therefore surrogate models for that equation were developed in this project. In project we have used following surrogate modeling methods: </p>
 
-* Linear Regression,
+* Multiple Linear Regression,
 * Random Forrest Regression,
 * Support Vector Regression,
 * K-Nearest Neighbors Regression.
@@ -41,7 +41,7 @@ Methods are in package functions used as:
 
 | Method                      | Package deffinition|
 |:---------------------------:|:------------------:|
-| Linear Regression           | "LR"               |
+| Multiple Linear Regression           | "MLR"               |
 | Random Forrest Regression   | "RFR"              |
 | Support Vector Regression   | "SVR"              |
 |K-Nearest Neighbors Regression   | "KNR"              |
@@ -128,7 +128,7 @@ If we want to compare results of true and predicted values and also plot it:
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values and by enabling plot argument, function returns
 # plot of comparison
- sm.compare_true_pred("RFR","SVR", "KNR", "LR",
+ sm.compare_true_pred("RFR","SVR", "KNR", "MLR",
                      plot = True, results = True)
 ```
 <p align="justify">If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:</p>

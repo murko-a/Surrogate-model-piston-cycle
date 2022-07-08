@@ -13,7 +13,7 @@ def predict_mult_fun(self, *models, predict_data):
     Args:
         *models: Surrogate models argument list.
             Options:   "RFR" - Random Forrest Regression,
-                        "LR" - Linear Regression,
+                        "MLR" - Multiple Linear Regression,
                         "SVR" - Support Vector Regression,
                         "KNR" - K Nearest Neighbour Regression
 
