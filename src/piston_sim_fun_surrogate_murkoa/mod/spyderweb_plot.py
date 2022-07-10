@@ -16,8 +16,8 @@ def plot_spyderweb(self, performance_df):
         range_rmse,
         range_r2,
         range_time]
-    categories = ['Accuracy', 'mean(MAE)', 'mean(MSE)',
-                  'mean(RMSE)', 'mean(R2)', 'time']
+    categories = ["Accuracy", "mean(MAE)", "mean(MSE)",
+                  "mean(RMSE)", "mean(R2)", "time"]
     fig = go.Figure()
     per_df = performance_df
     for mm in self.mdls_pf:
@@ -46,7 +46,7 @@ def plot_spyderweb(self, performance_df):
                per_df.loc[mm, per_df.columns[7]],
                per_df.loc[mm, per_df.columns[9]]],
             theta=categories,
-            fill='toself',
+            fill="toself",
             name=mm
         ))
 
@@ -57,7 +57,9 @@ def plot_spyderweb(self, performance_df):
                     range=[0, 1]
                 )),
             showlegend=True,
-            title_text='Performance of models'
+            title_text="Performance of models",
+            font_family="Times New Roman",
+            font_size = 18
         )
 
     fig.show()

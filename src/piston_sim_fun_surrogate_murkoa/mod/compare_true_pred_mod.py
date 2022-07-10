@@ -68,7 +68,7 @@ def compare_true_pred_fun(self, *models, plot, results):
             axs_size = len(mdls_pf)
             plot_settings(fig_size=(25, 55))
             fig, axs = plt.subplots(
-                axs_size, sharex=True, squeeze=True, subplot_kw=dict(
+                1, axs_size, sharex=True, squeeze=True, subplot_kw=dict(
                     box_aspect=1))
             fig.subplots_adjust(hspace=0.2)
             fig.suptitle(

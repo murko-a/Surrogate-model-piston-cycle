@@ -112,15 +112,15 @@ Than if you want to predict more values with defined parameter space, you can us
 
 ```python
  #performance with boxplot plot
- sm.performance("RFR","SVR","KNR", "SVR", 
+ sm.performance("RFR","MLR","KNR", "SVR", 
                 perf_df=True, predict_data = None, plot_type="boxplot")
 
  #performance with lolipop plot
- sm.performance("RFR","SVR","KNR", "SVR", 
+ sm.performance("RFR","MLR","KNR", "SVR", 
                 perf_df=True, predict_data = None, plot_type="lolipop")
 
  #performance with lolipop plot
- sm.performance("RFR","SVR","KNR", "SVR", 
+ sm.performance("RFR","MLR","KNR", "SVR", 
                 perf_df=True, predict_data = None, plot_type="spyderweb")
 ```
 If we want to compare results of true and predicted values and also plot it:
@@ -128,7 +128,7 @@ If we want to compare results of true and predicted values and also plot it:
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values and by enabling plot argument, function returns
 # plot of comparison
- sm.compare_true_pred("RFR","SVR", "KNR", "MLR",
+ sm.compare_true_pred("RFR","MLR","KNR", "SVR",
                      plot = True, results = True)
 ```
 <p align="justify">If you want to compare true and predicted values dependent on specific parameter in defined parameter space you can use:</p>
@@ -137,12 +137,12 @@ If we want to compare results of true and predicted values and also plot it:
 # by enabling results argument function returns also dataframe of parameters,
 # true and predicted values
 # to see panel plot of all parameter dependencies you can choose "all"
-sm.param_true_pred("RFR","SVR", "KNR", 
+sm.param_true_pred("RFR","MLR","KNR", "SVR", 
                 plot_type = "all", results = True)
 
 # to see plot of specified parameter dependency you can choose between defined
 # parameters ["M","S", "V_0", "k", "P_0", "T_a", "T_0"]
-sm.param_true_pred("RFR","SVR", "KNR", 
+sm.param_true_pred("RFR","MLR","KNR", "SVR", 
                 plot_type = "M", results = True)
 ```
 ## Support

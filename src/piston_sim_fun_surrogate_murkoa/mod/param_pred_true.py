@@ -146,7 +146,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
             fig.suptitle(
                 "Dependence of the function on the parameters",
                 fontsize=24)
-            plt.legend(loc="lower right")
+            fig.legend(bbox_to_anchor=(1.3, 0.6))
             plt.show()
 
         plot_compare_y_parameter_all(mdls_pf, sorted_dfs)
