@@ -64,15 +64,18 @@ def param_depend_fun(self, plot_type):
             fig = plt.figure()
             fig.suptitle(
                 "Dependence of the function on the parameter",
-                fontsize=20)
+                fontsize=18)
             plt.plot(
                 sorted_dfs[plt_typ][0],
                 sorted_dfs[plt_typ][1],
                 "o",
                 label="y_true")
             m, b = np.polyfit(sorted_dfs[plt_typ][0], sorted_dfs[plt_typ][1], 1)
-            plt.plot(sorted_dfs[plt_typ][0], m*sorted_dfs[plt_typ][0] + b)
+            plt.plot(sorted_dfs[plt_typ][0], m*sorted_dfs[plt_typ][0] + b, lw=1.5)
+            plt.xlabel(plot_type)
             plot_settings()
+            fig.supylabel("Cycle time [s]")
+            plt.gca().legend(("True values","Trendline"))
             plt.show()
 
         plot_parameter_depend(sorted_dfs, plt_typ)
@@ -106,13 +109,13 @@ def param_depend_fun(self, plot_type):
                     label="y_true",
                     markersize=2)
                 ma, ba = np.polyfit(sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], 1)
-                ax.plot(sorted_dfs[ptyp][0], ma*sorted_dfs[ptyp][0] + ba)
+                ax.plot(sorted_dfs[ptyp][0], ma*sorted_dfs[ptyp][0] + ba, lw=1.5)
                 ax.set_xlabel(ptyp)
             fig.supylabel("Cycle time [s]")
             fig.suptitle(
                 "Dependence of the function on the parameters",
-                fontsize=20)
-            fig.legend(bbox_to_anchor=(1.3, 0.6))
+                fontsize=18)
+            plt.gca().legend(("True values","Trendline"))
             plt.show()
 
         plot_parameter_depend_all(sorted_dfs)

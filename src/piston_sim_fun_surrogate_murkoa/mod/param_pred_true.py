@@ -90,7 +90,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
             fig = plt.figure()
             fig.suptitle(
                 "Dependence of the function on the parameter",
-                fontsize=20)
+                fontsize=18)
             plt.plot(
                 sorted_dfs[plt_typ][0],
                 sorted_dfs[plt_typ][1],
@@ -101,7 +101,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
                 plt.plot(sorted_dfs[plt_typ][0], ss_df[mm], "o", label=mm)
             plt.xlabel(plt_typ)
             plt.ylabel("Cycle time [s]")
-            plt.legend()
+            plt.figlegend(loc = 'lower center', ncol=5, labelspacing=0. ) 
             plt.show()
 
         plot_compare_y_parameter(mdls_pf, sorted_dfs, plt_typ)
@@ -145,8 +145,8 @@ def param_true_pred_fun(self, *models, plot_type, results):
             fig.supylabel("Cycle time [s]")
             fig.suptitle(
                 "Dependence of the function on the parameters",
-                fontsize=20)
-            fig.legend(bbox_to_anchor=(1.3, 0.6))
+                fontsize=18)
+            plt.figlegend(loc = 'lower center', ncol=5, labelspacing=0. ) 
             plt.show()
 
         plot_compare_y_parameter_all(mdls_pf, sorted_dfs)

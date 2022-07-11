@@ -66,27 +66,28 @@ def compare_true_pred_fun(self, *models, plot, results):
             vs. predicted value plot for every model.
             """
             axs_size = len(mdls_pf)
-            plot_settings(fig_size=(25, 55))
+            plot_settings()
             fig, axs = plt.subplots(
-                1, axs_size, sharex=True, squeeze=True, subplot_kw=dict(
+                1, axs_size, sharex=True, subplot_kw=dict(
                     box_aspect=1))
             fig.subplots_adjust(hspace=0.2)
             fig.suptitle(
                 "Comparison of true and predicted values",
-                fontsize=24)
+                fontsize=18)
             for i, mm in zip(range(axs_size), mdls_pf):
                 axs[i].plot(
                     united["y_true"],
                     united["y_true"],
                     "-",
-                    color="red",
-                    label="Reference line (predicted - observed)")
+                    color="red")
                 axs[i].plot(united["y_true"], united[mm],
-                            "o", label="predicted values", markersize=2)
+                            "o", markersize=2)
                 axs[i].set_title(mm)
+                axs[1].legend(labels=["Reference line (predicted - observed)", "Predicted values"],loc='upper center', 
+                    bbox_to_anchor=(0.5, -0.2),fancybox=False, shadow=False, ncol=4)
             fig.supxlabel("Actual output")
             fig.supylabel("Predicted output")
-            fig.legend()
             plt.xlim([0.2, 0.8])
+            #plt.gca().legend(("Reference line (predicted - observed)","Predicted values"))
             plt.show()
         plot_true_pred(mdls_pf)

@@ -8,7 +8,7 @@ def plot_lolipop(self, od_acc, od_mae, od_mse, od_rmse, od_r2, od_time):
     fig, ax = plt.subplots(
         2,3, sharex=False)
     fig.subplots_adjust(hspace=0.8)
-    fig.suptitle("Surrogate models performance", fontsize=24)
+    fig.suptitle("Surrogate models performance", fontsize=18)
 
     ax[0][0].plot(list(od_acc["Accuracy"]), data_range, "bo", zorder=1)
     ax[0][0].hlines(
