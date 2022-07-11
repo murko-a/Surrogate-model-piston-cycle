@@ -58,6 +58,7 @@ This script requires the following modules:
  * [Matplotlib = v3.5.2](https://matplotlib.org/)
  * [scikit-learn = v1.1.1](https://scikit-learn.org/stable/)
  * [SMT: Surrogate Modeling Toolbox = v1.2.0](https://smt.readthedocs.io/en/latest/)
+ * [Plotly = v5.9.0](https://plotly.com/)
 	
 ## Setup
 To run this project, install it locally using pip:
