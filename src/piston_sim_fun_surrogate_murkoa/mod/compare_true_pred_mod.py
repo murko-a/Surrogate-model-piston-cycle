@@ -80,12 +80,13 @@ def compare_true_pred_fun(self, *models, plot, results):
                     united["y_true"],
                     "-",
                     color="red",
-                    label="true values")
+                    label="Reference line (predicted - observed)")
                 axs[i].plot(united["y_true"], united[mm],
                             "o", label="predicted values", markersize=2)
                 axs[i].set_title(mm)
-            fig.supxlabel("Cycle time [s]")
-            fig.supylabel("Cycle time [s]")
+            fig.supxlabel("Actual output")
+            fig.supylabel("Predicted output")
+            fig.legend()
             plt.xlim([0.2, 0.8])
             plt.show()
         plot_true_pred(mdls_pf)

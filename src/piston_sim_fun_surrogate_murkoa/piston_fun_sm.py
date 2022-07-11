@@ -21,6 +21,7 @@ import os
 import sys
 sys.path.append("mod")
 from mod.show_folds_mod import show_folds_fun
+from mod.parameter_depend import param_depend_fun
 from mod.compare_true_pred_mod import compare_true_pred_fun
 from mod.performance_mod import performance_fun
 from mod.predict_mod import predict_fun
@@ -145,6 +146,30 @@ Attributes:
 
         """
         return show_folds_fun(self)
+
+    def param_depend(self, plot_type = "all"):
+        """Comparison of true and predicted values function.
+
+        Function takes plot_type which defines which input/output variable dependency 
+        should be ploted.
+
+        Args:
+            plot_type (sting): returns true/predicted values vs. parameter plot.
+                                Default is "all". Plot options:
+                                    ["all","M","S", "V_0", "k", "P_0", "T_a", "T_0"]
+
+        Returns:
+        Plot of dependency of output values regarding the input parameters.
+
+        Raises:
+            KeyError: If used plot type in `plot_type` parameter is not defined
+                            in package description..
+
+        """
+        if plot_type not in ["all", "M", "S", "V0", "k", "P0", "Ta", "T0"]:
+            raise KeyError("Defined plot type not in this package.")
+        else:
+            return param_depend_fun(self, plot_type = plot_type)
 
     def predict(self, *models, predict_data):
         """Quick prediction function.
@@ -328,7 +353,7 @@ Attributes:
 
                 plot_type (sting): returns true/predicted values vs. parameter plot.
                                                         Default is "all". Plot options:
-                                                                ["all","M","S", "V_0", "k", "P_0", "T_a", "T_0"]
+                                                                ["all","M","S", "V0", "k", "P0", "Ta", "T0"]
 
 
                 results (bool): returns dataframe of parameters, true and predicted values.
@@ -349,7 +374,7 @@ Attributes:
                 raise KeyError("Defined models not in this package.")
             else:
                 pass
-        if plot_type not in ["all", "M", "S", "V_0", "k", "P_0", "T_a", "T_0"]:
+        if plot_type not in ["all", "M", "S", "V0", "k", "P0", "Ta", "T0"]:
             raise KeyError("Defined plot type not in this package.")
         else:
             return param_true_pred_fun(

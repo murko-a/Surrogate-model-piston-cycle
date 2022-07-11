@@ -1,43 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from IPython.display import display
 from plot_settings_mod import plot_settings
 import matplotlib.gridspec as gridspec
 
 
-def param_true_pred_fun(self, *models, plot_type, results):
+def param_depend_fun(self, plot_type):
     """Comparison of true and predicted values function.
 
-    Function takes user-defined models from models option list,
-    boolean argument plot which returns comparison plot if enabled,
-    and boolean argument results which if enabled, returns dataframe of
-    parameter space generated with running the class, with predicted
-    values of defined models and calculated true values.
+    Function takes plot_type which defines which input/output variable dependency 
+    should be ploted.
 
     Args:
-        *models: Surrogate models argument list.
-                Options:   "RFR" - Random Forrest Regression,
-                            "MLR" - Multiple Linear Regression,
-                            "SVR" - Support Vector Regression,
-                            "KNR" - K Nearest Neighbour Regression
-
         plot_type (sting): returns true/predicted values vs. parameter plot.
                             Default is "all". Plot options:
                                 ["all","M","S", "V_0", "k", "P_0", "T_a", "T_0"]
 
-
-        results (bool): returns dataframe of parameters, true and predicted values.
-                            Default is True.
-
     Returns:
-        Dataframe of parameter space, calculated true values and predicted values
-        of selected models and  true/predicted values vs. parameter plot.
+       Plot of dependency of output values regarding the input parameters.
 
     Raises:
-        AttributeError: The ``Raises`` section is a list of all exceptions
-            that are relevant to the interface.
-        ValueError: If `param2` is equal to `param1`.
+        KeyError: If used plot type in `plot_type` parameter is not defined
+                        in package description..
 
     """
     united = pd.DataFrame(
@@ -51,17 +35,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
             "T_a",
             "T_0"])
     united["y_true"] = self.test_y
-    mdls_pf = models
     plt_typ = plot_type
-    self.mdls_pf = mdls_pf
-    for mm in self.mdls_pf:
-        mdl = self.models[mm]
-        mdl.fit(self.train_X, self.train_y)
-        pred = mdl.predict(self.test_X)
-        for j in range(np.shape(self.test_X)[0]):
-            united.loc[j, mm] = pred[j]
-    if results:
-        display(united)
     sorted_M_df = united.sort_values(by="M")
     sorted_S_df = united.sort_values(by="S")
     sorted_V0_df = united.sort_values(by="V_0")
@@ -71,17 +45,17 @@ def param_true_pred_fun(self, *models, plot_type, results):
     sorted_T0_df = united.sort_values(by="T_0")
 
     sorted_dfs = {
-        "M": [sorted_M_df["M"], sorted_M_df["y_true"], sorted_M_df],
-        "S": [sorted_S_df["S"], sorted_S_df["y_true"], sorted_S_df],
-        "V0": [sorted_V0_df["V_0"], sorted_V0_df["y_true"], sorted_V0_df],
-        "k": [sorted_k_df["k"], sorted_k_df["y_true"], sorted_k_df],
-        "P0": [sorted_P0_df["P_0"], sorted_P0_df["y_true"], sorted_P0_df],
-        "Ta": [sorted_Ta_df["T_a"], sorted_Ta_df["y_true"], sorted_Ta_df],
-        "T0": [sorted_T0_df["T_0"], sorted_T0_df["y_true"], sorted_T0_df]
+        "M": [sorted_M_df["M"], sorted_M_df["y_true"]],
+        "S": [sorted_S_df["S"], sorted_S_df["y_true"]],
+        "V0": [sorted_V0_df["V_0"], sorted_V0_df["y_true"]],
+        "k": [sorted_k_df["k"], sorted_k_df["y_true"]],
+        "P0": [sorted_P0_df["P_0"], sorted_P0_df["y_true"]],
+        "Ta": [sorted_Ta_df["T_a"], sorted_Ta_df["y_true"]],
+        "T0": [sorted_T0_df["T_0"], sorted_T0_df["y_true"]]
     }
 
     if plot_type in ["M", "S", "V0", "k", "P0", "Ta", "T0"]:
-        def plot_compare_y_parameter(mdls_pf, sorted_dfs, plt_typ):
+        def plot_parameter_depend(sorted_dfs, plt_typ):
             """
             Function that creates one plot of true/predicted value vs.
             defined parameter.
@@ -94,20 +68,17 @@ def param_true_pred_fun(self, *models, plot_type, results):
             plt.plot(
                 sorted_dfs[plt_typ][0],
                 sorted_dfs[plt_typ][1],
+                "o",
                 label="y_true")
+            m, b = np.polyfit(sorted_dfs[plt_typ][0], sorted_dfs[plt_typ][1], 1)
+            plt.plot(sorted_dfs[plt_typ][0], m*sorted_dfs[plt_typ][0] + b)
             plot_settings()
-            ss_df = sorted_dfs[plt_typ][2]
-            for mm in mdls_pf:
-                plt.plot(sorted_dfs[plt_typ][0], ss_df[mm], "o", label=mm)
-            plt.xlabel(plt_typ)
-            plt.ylabel("Cycle time [s]")
-            plt.legend()
             plt.show()
 
-        plot_compare_y_parameter(mdls_pf, sorted_dfs, plt_typ)
+        plot_parameter_depend(sorted_dfs, plt_typ)
 
     elif plot_type == "all":
-        def plot_compare_y_parameter_all(mdls_pf, sorted_dfs):
+        def plot_parameter_depend_all(sorted_dfs):
             """
             Function that creates  panel plot with true/predicted value vs.
             defined parameter subplots for all the parameters defined in
@@ -131,16 +102,11 @@ def param_true_pred_fun(self, *models, plot_type, results):
                 ax.plot(
                     sorted_dfs[ptyp][0],
                     sorted_dfs[ptyp][1],
+                    "o",
                     label="y_true",
-                    lw=0.35)
-                for mm in mdls_pf:
-                    ss_df = sorted_dfs[ptyp][2]
-                    ax.plot(
-                        sorted_dfs[ptyp][0],
-                        ss_df[mm],
-                        "o",
-                        label=mm,
-                        markersize=2)
+                    markersize=2)
+                ma, ba = np.polyfit(sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], 1)
+                ax.plot(sorted_dfs[ptyp][0], ma*sorted_dfs[ptyp][0] + ba)
                 ax.set_xlabel(ptyp)
             fig.supylabel("Cycle time [s]")
             fig.suptitle(
@@ -149,4 +115,4 @@ def param_true_pred_fun(self, *models, plot_type, results):
             fig.legend(bbox_to_anchor=(1.3, 0.6))
             plt.show()
 
-        plot_compare_y_parameter_all(mdls_pf, sorted_dfs)
+        plot_parameter_depend_all(sorted_dfs)
