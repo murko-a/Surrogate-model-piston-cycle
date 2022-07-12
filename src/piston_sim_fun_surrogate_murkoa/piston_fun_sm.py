@@ -7,7 +7,16 @@ Surjanovic, S., Bingham, D. Virtual Library of Simulation Experiments: Test Func
 Simon Fraser University, accessed 18 June 2022, <https://www.sfu.ca/~ssurjano/piston.html>.
 
 """
-
+import os
+import sys
+sys.path.append("mod")
+from mod.param_pred_true import param_true_pred_fun
+from mod.predict_mult_mod import predict_mult_fun
+from mod.predict_mod import predict_fun
+from mod.performance_mod import performance_fun
+from mod.compare_true_pred_mod import compare_true_pred_fun
+from mod.parameter_depend import param_depend_fun
+from mod.show_folds_mod import show_folds_fun
 from smt.sampling_methods import LHS
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
@@ -17,16 +26,7 @@ from sklearn.neighbors import KNeighborsRegressor
 import numpy as np
 import pandas as pd
 import yaml
-import os
-import sys
-sys.path.append("mod")
-from mod.show_folds_mod import show_folds_fun
-from mod.parameter_depend import param_depend_fun
-from mod.compare_true_pred_mod import compare_true_pred_fun
-from mod.performance_mod import performance_fun
-from mod.predict_mod import predict_fun
-from mod.predict_mult_mod import predict_mult_fun
-from mod.param_pred_true import param_true_pred_fun
+
 
 class SurrogateModel():
     """Surrogate modelling of piston simulation function
@@ -147,10 +147,10 @@ Attributes:
         """
         return show_folds_fun(self)
 
-    def param_depend(self, plot_type = "all"):
+    def param_depend(self, plot_type="all"):
         """Comparison of true and predicted values function.
 
-        Function takes plot_type which defines which input/output variable dependency 
+        Function takes plot_type which defines which input/output variable dependency
         should be ploted.
 
         Args:
@@ -169,7 +169,7 @@ Attributes:
         if plot_type not in ["all", "M", "S", "V0", "k", "P0", "Ta", "T0"]:
             raise KeyError("Defined plot type not in this package.")
         else:
-            return param_depend_fun(self, plot_type = plot_type)
+            return param_depend_fun(self, plot_type=plot_type)
 
     def predict(self, *models, predict_data):
         """Quick prediction function.

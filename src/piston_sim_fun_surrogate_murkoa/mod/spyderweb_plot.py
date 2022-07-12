@@ -59,7 +59,7 @@ def plot_spyderweb(self, performance_df):
             showlegend=True,
             title_text="Performance of models",
             font_family="Times New Roman",
-            font_size = 18
+            font_size=18
         )
 
     fig.show()

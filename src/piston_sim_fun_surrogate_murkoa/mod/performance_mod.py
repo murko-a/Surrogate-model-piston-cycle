@@ -95,12 +95,12 @@ def performance_fun(self, *models, perf_df, plot_perf):
             res_r2=results_r2)
 
     def plot_performance_spyderweb(self, performance_df):
-                """
-                Function takes performance results and
-        returns spyderweb plot of that results. Spyderweb plot presents normalized values of results.
+        """
+        Function takes performance results and
+returns spyderweb plot of that results. Spyderweb plot presents normalized values of results.
 
-                """
-                return plot_spyderweb(self, performance_df = performance_df)
+        """
+        return plot_spyderweb(self, performance_df=performance_df)
 
     if plot_perf == "lolipop":
         plot_performance_lolipop(
@@ -122,4 +122,3 @@ def performance_fun(self, *models, perf_df, plot_perf):
 
     elif plot_perf == "spyderweb":
         plot_performance_spyderweb(self, performance_df)
-

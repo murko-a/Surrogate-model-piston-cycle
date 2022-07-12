@@ -66,14 +66,14 @@ def compare_true_pred_fun(self, *models, plot, results):
             vs. predicted value plot for every model.
             """
             axs_size = len(mdls_pf)
-            plot_settings()
+            plot_settings(fig_size=(20, 5))
             fig, axs = plt.subplots(
                 1, axs_size, sharex=True, subplot_kw=dict(
                     box_aspect=1))
             fig.subplots_adjust(hspace=0.2)
             fig.suptitle(
                 "Comparison of true and predicted values",
-                fontsize=18)
+                fontsize=18, y=0.8)
             for i, mm in zip(range(axs_size), mdls_pf):
                 axs[i].plot(
                     united["y_true"],

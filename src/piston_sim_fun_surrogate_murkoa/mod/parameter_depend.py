@@ -8,7 +8,7 @@ import matplotlib.gridspec as gridspec
 def param_depend_fun(self, plot_type):
     """Comparison of true and predicted values function.
 
-    Function takes plot_type which defines which input/output variable dependency 
+    Function takes plot_type which defines which input/output variable dependency
     should be ploted.
 
     Args:
@@ -70,12 +70,16 @@ def param_depend_fun(self, plot_type):
                 sorted_dfs[plt_typ][1],
                 "o",
                 label="y_true")
-            m, b = np.polyfit(sorted_dfs[plt_typ][0], sorted_dfs[plt_typ][1], 1)
-            plt.plot(sorted_dfs[plt_typ][0], m*sorted_dfs[plt_typ][0] + b, lw=1.5)
+            m, b = np.polyfit(
+                sorted_dfs[plt_typ][0], sorted_dfs[plt_typ][1], 1)
+            plt.plot(
+                sorted_dfs[plt_typ][0],
+                m * sorted_dfs[plt_typ][0] + b,
+                lw=1.5)
             plt.xlabel(plot_type)
             plot_settings()
             fig.supylabel("Cycle time [s]")
-            plt.gca().legend(("True values","Trendline"))
+            plt.gca().legend(("True values", "Trendline"))
             plt.show()
 
         plot_parameter_depend(sorted_dfs, plt_typ)
@@ -108,14 +112,18 @@ def param_depend_fun(self, plot_type):
                     "o",
                     label="y_true",
                     markersize=2)
-                ma, ba = np.polyfit(sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], 1)
-                ax.plot(sorted_dfs[ptyp][0], ma*sorted_dfs[ptyp][0] + ba, lw=1.5)
+                ma, ba = np.polyfit(
+                    sorted_dfs[ptyp][0], sorted_dfs[ptyp][1], 1)
+                ax.plot(
+                    sorted_dfs[ptyp][0],
+                    ma * sorted_dfs[ptyp][0] + ba,
+                    lw=1.5)
                 ax.set_xlabel(ptyp)
             fig.supylabel("Cycle time [s]")
             fig.suptitle(
                 "Dependence of the function on the parameters",
                 fontsize=18)
-            plt.gca().legend(("True values","Trendline"))
+            plt.gca().legend(("True values", "Trendline"))
             plt.show()
 
         plot_parameter_depend_all(sorted_dfs)
