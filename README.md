@@ -114,15 +114,15 @@ Than if you want to predict more values with defined parameter space, you can us
 ```python
  #performance with boxplot plot
  sm.performance("RFR","MLR","KNR", "SVR", 
-                perf_df=True, predict_data = None, plot_type="boxplot")
+                perf_df=True, plot_type="boxplot")
 
  #performance with lolipop plot
  sm.performance("RFR","MLR","KNR", "SVR", 
-                perf_df=True, predict_data = None, plot_type="lolipop")
+                perf_df=True, plot_type="lolipop")
 
  #performance with lolipop plot
  sm.performance("RFR","MLR","KNR", "SVR", 
-                perf_df=True, predict_data = None, plot_type="spyderweb")
+                perf_df=True, plot_type="spyderweb")
 ```
 If we want to compare results of true and predicted values and also plot it:
 ```python

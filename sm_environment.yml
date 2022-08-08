@@ -1,0 +1,4 @@
+name: surrogate-mod
+channels:
+  - defaults
+prefix: C:\Users\XPS13\anaconda3\envs\surrogate-mod
