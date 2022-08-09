@@ -2,7 +2,8 @@ from numpy import absolute
 from sklearn.model_selection import cross_val_score
 import pandas as pd
 import numpy as np
-from time import process_time
+from time import process_time, perf_counter
+
 
 
 def perf_calc(self):
@@ -110,11 +111,11 @@ def perf_calc(self):
 
     def time_mod(self):
         for mm in self.mdls_pf:
-            startk = process_time()
+            startk = perf_counter()
             mdl = self.models[mm]
             mdl.fit(self.train_X, self.train_y)
             mdl.predict(self.test_X)
-            endk = process_time()
+            endk = perf_counter()
             tt = ((endk - startk) / 60)
             performance_df.loc[mm, performance_df.columns[9]] = tt
     time_mod(self)
