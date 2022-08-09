@@ -2,7 +2,7 @@ from numpy import absolute
 from sklearn.model_selection import cross_val_score
 import pandas as pd
 import numpy as np
-from time import process_time, perf_counter
+from time import perf_counter
 
 
 
