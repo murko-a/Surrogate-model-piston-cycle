@@ -1,31 +1,38 @@
-"""
-Author: Anze Murko <anze.murko@rwth-aachen.com>
+"""Develops python package for surrogate modeling of specific problem.
 
-This package is distributed under MIT license.
-Piston simulation function problem from:
+This package is developing a surrogate model of a chain of
+nonlinear equations of piston simulation function problem from:
 Surjanovic, S., Bingham, D. Virtual Library of Simulation Experiments: Test Functions and Datasets,
 Simon Fraser University, accessed 18 June 2022, <https://www.sfu.ca/~ssurjano/piston.html>.
-
+In surrogate modeling methods like Multiple Linear Regression, Support Vector Regression,
+Random Forrest Regression and K-Nearest Neighbours Regresion are used.
 """
 import os
 import sys
 sys.path.append("mod")
-from mod.param_pred_true import param_true_pred_fun
-from mod.predict_mult_mod import predict_mult_fun
-from mod.predict_mod import predict_fun
-from mod.performance_mod import performance_fun
-from mod.compare_true_pred_mod import compare_true_pred_fun
-from mod.parameter_depend import param_depend_fun
-from mod.show_folds_mod import show_folds_fun
-from smt.sampling_methods import LHS
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.svm import SVR
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import KFold
-from sklearn.neighbors import KNeighborsRegressor
-import numpy as np
-import pandas as pd
 import yaml
+import pandas as pd
+import numpy as np
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import KFold
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
+from smt.sampling_methods import LHS
+from mod.show_folds_mod import show_folds_fun
+from mod.parameter_depend import param_depend_fun
+from mod.compare_true_pred_mod import compare_true_pred_fun
+from mod.performance_mod import performance_fun
+from mod.predict_mod import predict_fun
+from mod.predict_mult_mod import predict_mult_fun
+from mod.param_pred_true import param_true_pred_fun
+
+__author__ = "Anze Murko"
+__license__ = "MIT"
+__version__ = "1.0.6"
+__maintainer__ = "Anze Murko"
+__email__ = "anze.murko@rwth-aachen.com"
+__status__ = "Development"
 
 
 class SurrogateModel():
