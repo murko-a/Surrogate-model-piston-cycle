@@ -66,28 +66,42 @@ def compare_true_pred_fun(self, *models, plot, results):
             vs. predicted value plot for every model.
             """
             axs_size = len(mdls_pf)
-            plot_settings(fig_size=(20, 5))
+            plot_settings(fig_size=(15, 10))
             fig, axs = plt.subplots(
-                1, axs_size, sharex=True, subplot_kw=dict(
+                2, 2, sharex=True, subplot_kw=dict(
                     box_aspect=1))
             fig.subplots_adjust(hspace=0.2)
             fig.suptitle(
                 "Comparison of true and predicted values",
-                fontsize=18, y=0.8)
+                fontsize=18)
+            k = 0
             for i, mm in zip(range(axs_size), mdls_pf):
-                axs[i].plot(
-                    united["y_true"],
-                    united["y_true"],
-                    "-",
-                    color="red")
-                axs[i].plot(united["y_true"], united[mm],
-                            "o", markersize=2)
-                axs[i].set_title(mm)
-                axs[1].legend(labels=["Reference line (predicted - observed)", "Predicted values"],loc='upper center', 
-                    bbox_to_anchor=(0.5, -0.2),fancybox=False, shadow=False, ncol=4)
+                if i < 2:
+                    axs[0, i].plot(
+                        united["y_true"],
+                        united["y_true"],
+                        "-",
+                        color="red")
+                    axs[0, i].plot(united["y_true"], united[mm],
+                                   "o", markersize=2)
+                    axs[0, i].set_title(mm)
+                elif i <= 3:
+                    axs[1, k].plot(
+                        united["y_true"],
+                        united["y_true"],
+                        "-",
+                        color="red")
+                    axs[1, k].plot(united["y_true"], united[mm],
+                                   "o", markersize=2)
+                    axs[1, k].set_title(mm)
+                    k += 1
+                else:
+                    break
+            axs[1, 1].legend(labels=["Reference line", "Predicted values"],
+                             loc='center left', bbox_to_anchor=(1, 0.5))
             fig.supxlabel("Actual output")
             fig.supylabel("Predicted output")
             plt.xlim([0.2, 0.8])
-            #plt.gca().legend(("Reference line (predicted - observed)","Predicted values"))
+            plt.ylim([0.2, 0.8])
             plt.show()
         plot_true_pred(mdls_pf)

@@ -76,9 +76,9 @@ def param_depend_fun(self, plot_type):
                 sorted_dfs[plt_typ][0],
                 m * sorted_dfs[plt_typ][0] + b,
                 lw=1.5)
-            plt.xlabel(plot_type)
+            plt.xlabel(plot_type, labelpad=10)
             plot_settings()
-            fig.supylabel("Cycle time [s]")
+            plt.ylabel("Cycle time [s]", labelpad=10)
             plt.gca().legend(("True values", "Trendline"))
             plt.show()
 
@@ -92,10 +92,10 @@ def param_depend_fun(self, plot_type):
             parameter space.
 
             """
-            fig = plt.figure()
-            plot_settings(fig_size=(15, 30))
-            gs = gridspec.GridSpec(4, 2)
-            gs.update(wspace=0.2, hspace=0.5)
+            fig = plt.figure(constrained_layout=True)
+            plot_settings()
+            gs = gridspec.GridSpec(4, 2, figure=fig)
+            gs.update(hspace=0.5)
             ax1 = plt.subplot(gs[0, 0])
             ax2 = plt.subplot(gs[0, 1])
             ax3 = plt.subplot(gs[1, 0])
@@ -123,7 +123,14 @@ def param_depend_fun(self, plot_type):
             fig.suptitle(
                 "Dependence of the function on the parameters",
                 fontsize=18)
-            plt.gca().legend(("True values", "Trendline"))
+            ax7.legend(
+                labels=[
+                    "True values",
+                    "Trendline"],
+                loc='center left',
+                bbox_to_anchor=(
+                    1,
+                    0.5))
             plt.show()
 
         plot_parameter_depend_all(sorted_dfs)

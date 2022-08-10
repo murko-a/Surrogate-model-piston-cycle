@@ -4,6 +4,7 @@ import pandas as pd
 from IPython.display import display
 from plot_settings_mod import plot_settings
 import matplotlib.gridspec as gridspec
+import itertools
 
 
 def param_true_pred_fun(self, *models, plot_type, results):
@@ -79,6 +80,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
         "Ta": [sorted_Ta_df["T_a"], sorted_Ta_df["y_true"], sorted_Ta_df],
         "T0": [sorted_T0_df["T_0"], sorted_T0_df["y_true"], sorted_T0_df]
     }
+    marker = itertools.cycle(('>', '+', '.', '*'))
 
     if plot_type in ["M", "S", "V0", "k", "P0", "Ta", "T0"]:
         def plot_compare_y_parameter(mdls_pf, sorted_dfs, plt_typ):
@@ -94,11 +96,18 @@ def param_true_pred_fun(self, *models, plot_type, results):
             plt.plot(
                 sorted_dfs[plt_typ][0],
                 sorted_dfs[plt_typ][1],
-                label="y_true")
+                label="y_true",
+                lw=0.8)
             plot_settings()
             ss_df = sorted_dfs[plt_typ][2]
             for mm in mdls_pf:
-                plt.plot(sorted_dfs[plt_typ][0], ss_df[mm], "o", label=mm)
+                plt.plot(
+                    sorted_dfs[plt_typ][0],
+                    ss_df[mm],
+                    linestyle='',
+                    marker=next(marker),
+                    label=mm,
+                    markersize=5)
             plt.xlabel(plt_typ)
             plt.ylabel("Cycle time [s]")
             plt.figlegend(loc='lower center', ncol=5, labelspacing=0.)
@@ -115,7 +124,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
 
             """
             fig = plt.figure()
-            plot_settings(fig_size=(15, 30))
+            plot_settings()
             gs = gridspec.GridSpec(4, 2)
             gs.update(wspace=0.2, hspace=0.5)
             ax1 = plt.subplot(gs[0, 0])
@@ -138,7 +147,7 @@ def param_true_pred_fun(self, *models, plot_type, results):
                     ax.plot(
                         sorted_dfs[ptyp][0],
                         ss_df[mm],
-                        "o",
+                        marker="o",
                         label=mm,
                         markersize=2)
                 ax.set_xlabel(ptyp)
