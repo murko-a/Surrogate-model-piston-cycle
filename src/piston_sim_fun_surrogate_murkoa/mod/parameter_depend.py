@@ -121,8 +121,7 @@ def param_depend_fun(self, plot_type):
                 ax.set_xlabel(ptyp)
             fig.supylabel("Cycle time [s]")
             fig.suptitle(
-                "Dependence of the function on the parameters",
-                fontsize=18)
+                "Dependence of the function on the parameters")
             ax7.legend(
                 labels=[
                     "True values",

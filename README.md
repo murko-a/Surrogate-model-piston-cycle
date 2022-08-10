@@ -94,6 +94,14 @@ Code to initially generate surrogate model:
  ```python
  sm.show_folds()
  ```
+ Next function can be used too observe parameter influence on the main function output. Result is panel plot or individual plot of function output dependency on all parameters or user choosen parameter, with trendline.
+ ```python
+ # to get panel plot with trendline of main function dependency of all used parameters
+ sm.param_depend(plot_type = "all")
+
+ # to get plot with trendline of main function dependency of user choosen parameter - in this case mass M
+ sm.param_depend(plot_type = "M")
+ ```
  Then with difined surrogate model we can use internal functions. For example quick prediction of your own data:
 ```python
  data = [30,0.005,0.002,1000,90000,292,345]
