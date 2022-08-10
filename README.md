@@ -17,8 +17,8 @@
 ## General info
 <p align="justify"> This project is about surrogate modeling of piston simulation function that calculates cycle time of one piston rotation regarding multiple parameters. Project is based on a equations,</p>
 
-$$ C(x) = 2\pi \sqrt{{M \over k+S^2 \frac{P_0 V_0}{T_0} \frac{T_a}{V^2} }} , \text{where} $$
-$$ V = S \frac{S}{2k}\bigg(\sqrt{A^2 + 4k \frac{P_0 V_0}{T_0}T_a} -A \bigg)$$
+$$C(x) = 2\pi \sqrt{{M \over k+S^2 \frac{P_0 V_0}{T_0} \frac{T_a}{V^2} }} , \text{where}$$
+$$V = S \frac{S}{2k}\bigg(\sqrt{A^2 + 4k \frac{P_0 V_0}{T_0}T_a} -A \bigg)$$
 $$A = P_0S + 19.62 M - \frac{kV_0}{S}$$	
 Symbols:
 * $M$ &nbsp; piston weight (kg)
