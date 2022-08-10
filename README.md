@@ -22,10 +22,10 @@ $$V = S \frac{S}{2k}\bigg(\sqrt{A^2 + 4k \frac{P_0 V_0}{T_0}T_a} -A \bigg)$$
 $$A = P_0S + 19.62 M - \frac{kV_0}{S}$$	
 Symbols:
 * $M$ &nbsp; piston weight (kg)
-* $S$ &nbsp; piston surface area (m$^2$)
-* $V_0$ &nbsp; 	initial gas volume (m$^3$)
+* $S$ &nbsp; piston surface area (m<sup>2</sup>)
+* $V_0$ &nbsp; 	initial gas volume (m<sup>3</sup>)
 * $k$ &nbsp; spring coefficient (N/m)
-* $P_0$ &nbsp; atmospheric pressure (N/m$^2$)
+* $P_0$ &nbsp; atmospheric pressure (N/m<sup>2</sup>)
 * $T_a$ &nbsp; ambient temperature (K)
 * $T_0$ &nbsp; filling gas temperature (K)
 
